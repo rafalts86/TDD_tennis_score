@@ -22,14 +22,14 @@ TEST(tennis, Player1_point)
     TEST_ASSERT_EQUAL(15, tennis_get_points(PLAYER1));
 }
 
-TEST(tennis, Player1_get_two_points)
+TEST(tennis, Player1_gets_two_points)
 {
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
     TEST_ASSERT_EQUAL(30, tennis_get_points(PLAYER1));
 }
 
-TEST(tennis, Player1_get_three_points)
+TEST(tennis, Player1_gets_three_points)
 {
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
@@ -41,4 +41,11 @@ TEST(tennis, Player2_point)
 {
     tennis_point(PLAYER2);
     TEST_ASSERT_EQUAL(15, tennis_get_points(PLAYER2));
+}
+
+TEST(tennis, Player2_gets_two_points)
+{
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    TEST_ASSERT_EQUAL(30, tennis_get_points(PLAYER2));
 }
