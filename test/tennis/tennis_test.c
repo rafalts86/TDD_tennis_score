@@ -7,6 +7,7 @@ TEST_GROUP(tennis);
 TEST_SETUP(tennis)
 {
     /* Init before every test */
+    tennis_init();
 }
 
 TEST_TEAR_DOWN(tennis)

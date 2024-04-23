@@ -18,3 +18,8 @@ uint8_t tennis_get_points(enum player player)
         return player1_points;
     }
 }
+
+void tennis_init(void)
+{
+    player1_points = 0;
+}
