@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 enum player
 {
@@ -5,4 +6,5 @@ enum player
     PLAYER2,
 };
 
-int tennis_get_points(enum player player);
+uint8_t tennis_get_points(enum player player);
+void tennis_point(enum player player);

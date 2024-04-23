@@ -17,5 +17,6 @@ TEST_TEAR_DOWN(tennis)
 
 TEST(tennis, Player1_point)
 {
+    tennis_point(PLAYER1);
     TEST_ASSERT_EQUAL(15, tennis_get_points(PLAYER1));
 }

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "unity_fixture.h": "c",
-        "tennis.h": "c"
+        "tennis.h": "c",
+        "stdint.h": "c"
     }
 }
