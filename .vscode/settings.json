@@ -3,5 +3,6 @@
         "unity_fixture.h": "c",
         "tennis.h": "c",
         "stdint.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "D:/TDD_SZKOLENIE/Tennis/test/tennis"
 }
