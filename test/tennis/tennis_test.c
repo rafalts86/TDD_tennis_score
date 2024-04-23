@@ -87,3 +87,13 @@ TEST(tennis, Player1_gets_gem_Player2_reset_points)
     tennis_point(PLAYER1);
     TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER2));
 }
+
+TEST(tennis, Player2_gets_gem_Player1_reset_points)
+{
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER1));
+}
