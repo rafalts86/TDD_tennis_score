@@ -1,11 +1,20 @@
 #include "tennis.h"
 
+static uint8_t player1_points;
+
 void tennis_point(enum player player)
 {
+    if(player == PLAYER1)
+    {
+        player1_points += 15;
+    }
     
 }
 
 uint8_t tennis_get_points(enum player player)
 {
-    return 0;
+    if(player == PLAYER1)
+    {
+        return player1_points;
+    }
 }
