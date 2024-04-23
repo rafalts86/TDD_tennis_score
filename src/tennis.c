@@ -28,6 +28,7 @@ void tennis_point(enum player player)
         else if(player1_points == 40)
         {
             player1_points = 0;
+            player2_points = 0;
             player1_gems++;
         }
     }
