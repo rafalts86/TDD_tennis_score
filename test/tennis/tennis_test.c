@@ -49,3 +49,11 @@ TEST(tennis, Player2_gets_two_points)
     tennis_point(PLAYER2);
     TEST_ASSERT_EQUAL(30, tennis_get_points(PLAYER2));
 }
+
+TEST(tennis, Player2_gets_three_points)
+{
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
+}
