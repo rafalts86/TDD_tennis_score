@@ -9,4 +9,6 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player2_point);
    RUN_TEST_CASE(tennis, Player2_gets_two_points);
    RUN_TEST_CASE(tennis, Player2_gets_three_points);
+   RUN_TEST_CASE(tennis, Player1_gets_four_points);
+
 }

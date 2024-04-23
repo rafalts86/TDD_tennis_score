@@ -8,6 +8,7 @@ void tennis_init(void)
 {
     player1_points = 0;
     player2_points = 0;
+    
 }
 
 void tennis_point(enum player player)
@@ -46,4 +47,9 @@ uint8_t tennis_get_points(enum player player)
     {
         return player2_points;
     }
+}
+
+uint8_t tennis_get_gems(enum player player)
+{
+  
 }

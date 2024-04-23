@@ -7,5 +7,6 @@ enum player
 };
 
 void tennis_init(void);
-uint8_t tennis_get_points(enum player player);
 void tennis_point(enum player player);
+uint8_t tennis_get_points(enum player player);
+uint8_t tennis_get_gems(enum player player);
