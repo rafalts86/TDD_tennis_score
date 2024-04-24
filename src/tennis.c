@@ -50,9 +50,16 @@ static void tennis_point_handle(player_t *player)
         case 40:
             player_t *opposite_player = tennis_get_opposite_player(player);
 
-            if(40 == opposite_player->points)
+            if(40 == opposite_player->points && false == player->is_advantage)
             {
                 player->is_advantage = true;
+            }
+            else if(true == player->is_advantage)
+            {
+                player->points = 0;
+                opposite_player->points = 0;
+                player->is_advantage = false;
+                player->gems++;
             }
             else
             {
