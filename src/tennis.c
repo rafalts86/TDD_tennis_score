@@ -89,3 +89,8 @@ uint8_t tennis_get_gems(enum player player)
         return player2.gems;
     }
 }
+
+bool tennis_is_advantage(enum player player)
+{
+    
+}
