@@ -4,6 +4,7 @@ typedef struct
 {
   uint8_t points;
   uint8_t gems;
+  bool is_advantage;
 } player_t;
 
 static player_t player1;
@@ -18,6 +19,7 @@ void tennis_init(void)
     player1.gems = 0;
     player2.points = 0;
     player2.gems = 0;
+    player1.is_advantage = false;
 }
 
 void tennis_point(enum player player)
@@ -46,10 +48,18 @@ static void tennis_point_handle(player_t *player)
             break;
 
         case 40:
-            player->points = 0;
             player_t *opposite_player = tennis_get_opposite_player(player);
-            opposite_player->points = 0;
-            player->gems++;
+
+            if(40 == opposite_player->points)
+            {
+                player->is_advantage = true;
+            }
+            else
+            {
+                player->points = 0;
+                opposite_player->points = 0;
+                player->gems++;
+            }
             break;
     }
 }
@@ -92,5 +102,12 @@ uint8_t tennis_get_gems(enum player player)
 
 bool tennis_is_advantage(enum player player)
 {
-    
+    if(player == PLAYER1)
+    {
+        return player1.is_advantage;
+    }
+    else if(player == PLAYER2)
+    {
+        return player2.is_advantage;
+    }
 }
