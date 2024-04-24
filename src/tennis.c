@@ -12,6 +12,9 @@ static player_t player2;
 
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
+static void tennis_add_15_points(player_t *player);
+static void tennis_add_10_points(player_t *player);
+static void tennis_40_points_handle(player_t *player);
 
 void tennis_init(void)
 {
@@ -40,42 +43,57 @@ static void tennis_point_handle(player_t *player)
     {
         case 0:
         case 15:
-            player->points += 15;
+            tennis_add_15_points(player);
             break;
         
         case 30:
-            player->points += 10;
+            tennis_add_10_points(player);
             break;
 
         case 40:
-            player_t *opposite_player = tennis_get_opposite_player(player);
-
-            if(40 == opposite_player->points)
-            {
-                if(true == opposite_player->is_advantage)
-                {
-                    opposite_player->is_advantage = false;
-                }
-                else if(false == player->is_advantage)
-                {
-                    player->is_advantage = true;
-                }
-                else if(true == player->is_advantage)
-                {
-                    player->points = 0;
-                    opposite_player->points = 0;
-                    player->is_advantage = false;
-                    player->gems++;
-                }
-            }
-            else
-            {
-                player->points = 0;
-                opposite_player->points = 0;
-                player->gems++;
-            }
+            tennis_40_points_handle(player);
             break;
     }
+}
+
+static void tennis_40_points_handle(player_t *player)
+{
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
+    if(40 == opposite_player->points)
+    {
+        if(true == opposite_player->is_advantage)
+        {
+            opposite_player->is_advantage = false;
+        }
+        else if(false == player->is_advantage)
+        {
+            player->is_advantage = true;
+        }
+        else if(true == player->is_advantage)
+        {
+            player->points = 0;
+            opposite_player->points = 0;
+            player->is_advantage = false;
+            player->gems++;
+        }
+    }
+    else
+    {
+        player->points = 0;
+        opposite_player->points = 0;
+        player->gems++;
+    }
+}
+
+static void tennis_add_15_points(player_t *player)
+{
+    player->points += 15;
+}
+
+static void tennis_add_10_points(player_t *player)
+{
+    player->points += 10;
 }
 
 static player_t *tennis_get_opposite_player(player_t *player)
