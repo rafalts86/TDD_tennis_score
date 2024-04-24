@@ -14,4 +14,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player1_gets_gem_Player2_reset_points);
    RUN_TEST_CASE(tennis, Player2_gets_gem_Player1_reset_points);
    RUN_TEST_CASE(tennis, Player1_advantage);
+   RUN_TEST_CASE(tennis, Player1_wins_after_advantage);
 }
