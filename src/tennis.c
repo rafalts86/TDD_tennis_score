@@ -1,53 +1,68 @@
 #include "tennis.h"
 
-static uint8_t player1_points;
-static uint8_t player1_gems;
-static uint8_t player2_points;
-static uint8_t player2_gems;
+typedef struct
+{
+  uint8_t points;
+  uint8_t gems;
+} player_t;
+
+static player_t player1;
+static player_t player2;
+
+static void tennis_point_handle(player_t *player);
+static player_t *tennis_get_opposite_player(player_t *player);
 
 void tennis_init(void)
 {
-    player1_points = 0;
-    player1_gems = 0;
-    player2_points = 0;
-    player2_gems = 0;
+    player1.points = 0;
+    player1.gems = 0;
+    player2.points = 0;
+    player2.gems = 0;
 }
 
 void tennis_point(enum player player)
 {
     if(player == PLAYER1)
     {
-        if(player1_points < 30)
-        {
-            player1_points += 15;
-        }
-        else if(player1_points == 30)
-        {
-            player1_points += 10;
-        }
-        else if(player1_points == 40)
-        {
-            player1_points = 0;
-            player2_points = 0;
-            player1_gems++;
-        }
+        tennis_point_handle(&player1);
     }
     else if(player == PLAYER2)
     {
-        if(player2_points < 30)
-        {
-            player2_points += 15;
-        }
-        else if(player2_points == 30)
-        {
-            player2_points += 10;
-        }
-        else if(player2_points == 40)
-        {
-            player2_points = 0;
-            player1_points = 0;
-            player2_gems++;
-        }
+        tennis_point_handle(&player2);
+    }
+}
+
+static void tennis_point_handle(player_t *player)
+{
+    switch(player->points)
+    {
+        case 0:
+        case 15:
+            player->points += 15;
+            break;
+        
+        case 30:
+            player->points += 10;
+            break;
+
+        case 40:
+            player->points = 0;
+            player_t *opposite_player = tennis_get_opposite_player(player);
+            opposite_player->points = 0;
+            player->gems++;
+            break;
+    }
+}
+
+static player_t *tennis_get_opposite_player(player_t *player)
+{
+    if(player == &player1)
+    {
+        return &player2;
+    }
+    else if(player == &player2)
+    {
+        return &player1;
     }
 }
 
@@ -55,11 +70,11 @@ uint8_t tennis_get_points(enum player player)
 {
     if(player == PLAYER1)
     {
-        return player1_points;
+        return player1.points;
     }
     else if(player == PLAYER2)
     {
-        return player2_points;
+        return player2.points;
     }
 }
 
@@ -67,10 +82,10 @@ uint8_t tennis_get_gems(enum player player)
 {
     if(player == PLAYER1)
     {
-        return player1_gems;
+        return player1.gems;
     }
-    if(player == PLAYER2)
+    else if(player == PLAYER2)
     {
-        return player2_gems;
+        return player2.gems;
     }
 }
