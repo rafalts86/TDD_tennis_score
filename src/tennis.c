@@ -16,6 +16,10 @@ static player_t *tennis_get_opposite_player(player_t *player);
 static void tennis_add_15_points(player_t *player);
 static void tennis_add_10_points(player_t *player);
 static void tennis_40_points_handle(player_t *player);
+static uint8_t tennis_get_player_points(player_t *player);
+static bool tennis_is_player_advantage(player_t *player);
+static void tennis_set_advantage(player_t *player);
+static void tennis_reset_advantage(player_t *player);
 
 void tennis_init(void)
 {
@@ -65,17 +69,17 @@ static void tennis_40_points_handle(player_t *player)
 {
     player_t *opposite_player = tennis_get_opposite_player(player);
 
-    if(40 == opposite_player->points)
+    if(40 == tennis_get_player_points(opposite_player))
     {
-        if(true == opposite_player->is_advantage)
+        if(true == tennis_is_player_advantage(opposite_player))
         {
-            opposite_player->is_advantage = false;
+           tennis_reset_advantage(opposite_player);
         }
         else if(false == player->is_advantage)
         {
-            player->is_advantage = true;
+            tennis_set_advantage(player);
         }
-        else if(true == player->is_advantage)
+        else if(true == tennis_is_player_advantage(player))
         {
             player->points = 0;
             opposite_player->points = 0;
@@ -97,6 +101,26 @@ static void tennis_40_points_handle(player_t *player)
             player->sets++;
         }
     }
+}
+
+static void tennis_set_advantage(player_t *player)
+{
+    player->is_advantage = true;
+}
+
+static void tennis_reset_advantage(player_t *player)
+{
+    player->is_advantage = false;
+}
+
+static bool tennis_is_player_advantage(player_t *player)
+{
+    return player->is_advantage;
+}
+
+static uint8_t tennis_get_player_points(player_t *player)
+{
+    return player->points;
 }
 
 static void tennis_add_15_points(player_t *player)
