@@ -17,4 +17,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player1_wins_after_advantage);
    RUN_TEST_CASE(tennis, Player1_advantage_and_player2_gets_point);
    RUN_TEST_CASE(tennis, Player2_advantage);
+   RUN_TEST_CASE(tennis, Player2_wins_after_advantage);
 }

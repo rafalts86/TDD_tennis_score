@@ -160,3 +160,19 @@ TEST(tennis, Player2_advantage)
 
     TEST_ASSERT_EQUAL(true, tennis_is_advantage(PLAYER2));
 }
+
+TEST(tennis, Player2_wins_after_advantage)
+{
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+
+    TEST_ASSERT_EQUAL(false, tennis_is_advantage(PLAYER2));
+    TEST_ASSERT_EQUAL(1, tennis_get_gems(PLAYER2));
+}
