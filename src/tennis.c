@@ -22,9 +22,11 @@ void tennis_init(void)
     player1.points = 0;
     player1.gems = 0;
     player1.sets = 0;
+    player1.is_advantage = false;
+
     player2.points = 0;
     player2.gems = 0;
-    player1.is_advantage = false;
+    player2.sets = 0;
     player2.is_advantage = false;
 }
 
@@ -163,6 +165,6 @@ uint8_t tennis_get_sets(enum player player)
     }
     else if(player == PLAYER2)
     {
-        
+        return player2.sets;
     }
 }
