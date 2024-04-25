@@ -24,6 +24,7 @@ static void tennis_reset_points(void);
 static void tennis_add_gem(player_t *player);
 static void tennis_add_set(player_t *player);
 static uint8_t tennis_get_player_gems(player_t *player);
+static void tennis_gem_win_handle(player_t *player);
 
 void tennis_init(void)
 {
@@ -85,23 +86,23 @@ static void tennis_40_points_handle(player_t *player)
         }
         else if(true == tennis_is_player_advantage(player))
         {
-            tennis_reset_points();
             tennis_reset_advantage(player);
-            tennis_add_gem(player);
-            if(6 == tennis_get_player_gems(player))
-            {
-                tennis_add_set(player);
-            }
+            tennis_gem_win_handle(player);
         }
     }
     else
     {
-        tennis_reset_points();
-        tennis_add_gem(player);
-        if(6 == tennis_get_player_gems(player))
-        {
-            tennis_add_set(player);
-        }
+       tennis_gem_win_handle(player);
+    }
+}
+
+static void tennis_gem_win_handle(player_t *player)
+{
+    tennis_reset_points();
+    tennis_add_gem(player);
+    if(6 == tennis_get_player_gems(player))
+    {
+        tennis_add_set(player);
     }
 }
 
