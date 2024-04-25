@@ -2,7 +2,8 @@
     "files.associations": {
         "unity_fixture.h": "c",
         "tennis.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "stdbool.h": "c"
     },
     "cmake.sourceDirectory": "D:/TDD_SZKOLENIE/Tennis/test/tennis"
 }

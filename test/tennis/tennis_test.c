@@ -195,3 +195,16 @@ TEST(tennis, Player2_advantage_and_player1_gets_point)
     TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
     TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER1));
 }
+
+TEST(tennis, Player1_wins_set)
+{
+    for(int i = 0; i < 6; i++)
+    {
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+    }
+
+    TEST_ASSERT_EQUAL(1, tennis_get_sets(PLAYER1));
+}

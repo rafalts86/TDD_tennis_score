@@ -4,6 +4,7 @@ typedef struct
 {
   uint8_t points;
   uint8_t gems;
+  uint8_t sets;
   bool is_advantage;
 } player_t;
 
@@ -20,6 +21,7 @@ void tennis_init(void)
 {
     player1.points = 0;
     player1.gems = 0;
+    player1.sets = 0;
     player2.points = 0;
     player2.gems = 0;
     player1.is_advantage = false;
@@ -143,4 +145,9 @@ bool tennis_is_advantage(enum player player)
     {
         return player2.is_advantage;
     }
+}
+
+uint8_t tennis_get_sets(enum player player)
+{
+    return 0;
 }
