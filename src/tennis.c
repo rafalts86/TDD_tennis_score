@@ -23,6 +23,7 @@ void tennis_init(void)
     player2.points = 0;
     player2.gems = 0;
     player1.is_advantage = false;
+    player2.is_advantage = false;
 }
 
 void tennis_point(enum player player)

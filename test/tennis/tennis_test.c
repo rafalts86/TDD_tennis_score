@@ -146,3 +146,17 @@ TEST(tennis, Player1_advantage_and_player2_gets_point)
     TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER1));
     TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
 }
+
+TEST(tennis, Player2_advantage)
+{
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+
+    TEST_ASSERT_EQUAL(true, tennis_is_advantage(PLAYER2));
+}
