@@ -20,6 +20,10 @@ static uint8_t tennis_get_player_points(player_t *player);
 static bool tennis_is_player_advantage(player_t *player);
 static void tennis_set_advantage(player_t *player);
 static void tennis_reset_advantage(player_t *player);
+static void tennis_reset_points(void);
+static void tennis_add_gem(player_t *player);
+static void tennis_add_set(player_t *player);
+static uint8_t tennis_get_player_gems(player_t *player);
 
 void tennis_init(void)
 {
@@ -75,32 +79,51 @@ static void tennis_40_points_handle(player_t *player)
         {
            tennis_reset_advantage(opposite_player);
         }
-        else if(false == player->is_advantage)
+        else if(false == tennis_is_player_advantage(player))
         {
             tennis_set_advantage(player);
         }
         else if(true == tennis_is_player_advantage(player))
         {
-            player->points = 0;
-            opposite_player->points = 0;
-            player->is_advantage = false;
-            player->gems++;
-            if(6 == player->gems)
+            tennis_reset_points();
+            tennis_reset_advantage(player);
+            tennis_add_gem(player);
+            if(6 == tennis_get_player_gems(player))
             {
-                player->sets++;
+                tennis_add_set(player);
             }
         }
     }
     else
     {
-        player->points = 0;
-        opposite_player->points = 0;
-        player->gems++;
-        if(6 == player->gems)
+        tennis_reset_points();
+        tennis_add_gem(player);
+        if(6 == tennis_get_player_gems(player))
         {
-            player->sets++;
+            tennis_add_set(player);
         }
     }
+}
+
+static uint8_t tennis_get_player_gems(player_t *player)
+{
+    return player->gems;
+}
+
+static void tennis_add_set(player_t *player)
+{
+    player->sets++;
+}
+
+static void tennis_add_gem(player_t *player)
+{
+    player->gems++;
+}
+
+static void tennis_reset_points(void)
+{
+    player1.points = 0;
+    player2.points = 0;
 }
 
 static void tennis_set_advantage(player_t *player)
