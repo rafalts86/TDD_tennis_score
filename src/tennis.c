@@ -79,6 +79,10 @@ static void tennis_40_points_handle(player_t *player)
             opposite_player->points = 0;
             player->is_advantage = false;
             player->gems++;
+            if(6 == player->gems)
+            {
+                player->sets++;
+            }
         }
     }
     else
@@ -86,6 +90,10 @@ static void tennis_40_points_handle(player_t *player)
         player->points = 0;
         opposite_player->points = 0;
         player->gems++;
+        if(6 == player->gems)
+        {
+            player->sets++;
+        }
     }
 }
 
@@ -149,5 +157,12 @@ bool tennis_is_advantage(enum player player)
 
 uint8_t tennis_get_sets(enum player player)
 {
-    return 0;
+    if(player == PLAYER1)
+    {
+        return player1.sets;
+    }
+    else if(player == PLAYER2)
+    {
+        
+    }
 }
