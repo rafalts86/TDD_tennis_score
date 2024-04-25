@@ -2,6 +2,78 @@
 
 #include "tennis.h"
 
+uint8_t gem_win(enum player player)
+{
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        tennis_point(player);
+    }
+
+    return 1;
+}
+
+uint8_t set_win(enum player player)
+{
+    for(uint8_t i = 0; i < 6; i++)
+    {
+        gem_win(player);
+    }
+
+    return 1;
+}
+
+uint8_t point_win(enum player player, uint8_t current_points)
+{
+    uint8_t points = 0;
+
+    tennis_point(player);
+
+    switch(current_points)
+    {
+        case 0:
+        case 15:
+            points = 15;
+            break;
+        
+        case 30:
+            points = 10;
+            break;
+
+        case 40:
+            points = 0;
+            break;
+    }
+
+    return points;
+}
+
+void advantage(enum player player)
+{
+    if(player == PLAYER1)
+    {
+        tennis_point(PLAYER2);
+        tennis_point(PLAYER2);
+        tennis_point(PLAYER2);
+        
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+    }
+    else if(player == PLAYER2)
+    {
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+        tennis_point(PLAYER1);
+
+        tennis_point(PLAYER2);
+        tennis_point(PLAYER2);
+        tennis_point(PLAYER2);
+        tennis_point(PLAYER2);
+    }
+}
+
+
 TEST_GROUP(tennis);
 
 TEST_SETUP(tennis)
@@ -18,206 +90,184 @@ TEST_TEAR_DOWN(tennis)
 
 TEST(tennis, Player1_point)
 {
-    tennis_point(PLAYER1);
-    TEST_ASSERT_EQUAL(15, tennis_get_points(PLAYER1));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER1, expected);
+
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER1));
 }
 
 TEST(tennis, Player1_gets_two_points)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    TEST_ASSERT_EQUAL(30, tennis_get_points(PLAYER1));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER1, expected);
+    expected += point_win(PLAYER1, expected);
+
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER1));
 }
 
 TEST(tennis, Player1_gets_three_points)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER1));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER1, expected);
+    expected += point_win(PLAYER1, expected);
+    expected += point_win(PLAYER1, expected);
+
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER1));
 }
 
 TEST(tennis, Player2_point)
 {
-    tennis_point(PLAYER2);
-    TEST_ASSERT_EQUAL(15, tennis_get_points(PLAYER2));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER2, expected);
+   
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER2));
 }
 
 TEST(tennis, Player2_gets_two_points)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    TEST_ASSERT_EQUAL(30, tennis_get_points(PLAYER2));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER2, expected);
+    expected += point_win(PLAYER2, expected);
+
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER2));
 }
 
 TEST(tennis, Player2_gets_three_points)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
+    uint8_t expected = 0;
+
+    expected += point_win(PLAYER2, expected);
+    expected += point_win(PLAYER2, expected);
+    expected += point_win(PLAYER2, expected);
+
+    TEST_ASSERT_EQUAL(expected, tennis_get_points(PLAYER2));
 }
 
 TEST(tennis, Player1_gets_four_points)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER1));
-    TEST_ASSERT_EQUAL(1, tennis_get_gems(PLAYER1));
+    uint8_t expected_gems = 0;
+    uint8_t expected_points = 0;
+
+    expected_gems += gem_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_gems, tennis_get_gems(PLAYER1));
 }
 
 TEST(tennis, Player2_gets_four_points)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER2));
-    TEST_ASSERT_EQUAL(1, tennis_get_gems(PLAYER2));
+    uint8_t expected_gems = 0;
+    uint8_t expected_points = 0;
+
+    expected_gems += gem_win(PLAYER2);
+
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER2));
+    TEST_ASSERT_EQUAL(expected_gems, tennis_get_gems(PLAYER2));
 }
 
 TEST(tennis, Player1_gets_gem_Player2_reset_points)
 {
-    tennis_point(PLAYER1);
+    uint8_t expected_points = 0;
+   
     tennis_point(PLAYER2);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER2));
+    gem_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER2));
 }
 
 TEST(tennis, Player2_gets_gem_Player1_reset_points)
 {
-    tennis_point(PLAYER2);
+    uint8_t expected_points = 0;
+
     tennis_point(PLAYER1);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    TEST_ASSERT_EQUAL(0, tennis_get_points(PLAYER1));
+    gem_win(PLAYER2);
+
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
 }
 
 TEST(tennis, Player1_advantage)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
+    advantage(PLAYER1);
 
     TEST_ASSERT_EQUAL(true, tennis_is_advantage(PLAYER1));
 }
 
 TEST(tennis, Player1_wins_after_advantage)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
+    uint8_t expectet_gems = 1;
 
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
+    advantage(PLAYER1);
     tennis_point(PLAYER1);
 
     TEST_ASSERT_EQUAL(false, tennis_is_advantage(PLAYER1));
-    TEST_ASSERT_EQUAL(1, tennis_get_gems(PLAYER1));
+    TEST_ASSERT_EQUAL(expectet_gems, tennis_get_gems(PLAYER1));
 }
 
 TEST(tennis, Player1_advantage_and_player2_gets_point)
 {
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
+    uint8_t expectet_gems = 0;
+    uint8_t expectet_points = 40;
 
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-
+    advantage(PLAYER1);
     tennis_point(PLAYER2);
 
     TEST_ASSERT_EQUAL(false, tennis_is_advantage(PLAYER1));
-    TEST_ASSERT_EQUAL(0, tennis_get_gems(PLAYER1));
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER1));
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
+    TEST_ASSERT_EQUAL(expectet_gems, tennis_get_gems(PLAYER1));
+    TEST_ASSERT_EQUAL(expectet_points, tennis_get_points(PLAYER1));
+    TEST_ASSERT_EQUAL(expectet_points, tennis_get_points(PLAYER2));
 }
 
 TEST(tennis, Player2_advantage)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
+    advantage(PLAYER2);
 
     TEST_ASSERT_EQUAL(true, tennis_is_advantage(PLAYER2));
 }
 
 TEST(tennis, Player2_wins_after_advantage)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
+    uint8_t expectet_gems = 1;
 
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
+    advantage(PLAYER2);
     tennis_point(PLAYER2);
 
     TEST_ASSERT_EQUAL(false, tennis_is_advantage(PLAYER2));
-    TEST_ASSERT_EQUAL(1, tennis_get_gems(PLAYER2));
+    TEST_ASSERT_EQUAL(expectet_gems, tennis_get_gems(PLAYER2));
 }
 
 TEST(tennis, Player2_advantage_and_player1_gets_point)
 {
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
-    tennis_point(PLAYER1);
+    uint8_t expectet_gems = 0;
+    uint8_t expectet_points = 40;
 
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-    tennis_point(PLAYER2);
-
+    advantage(PLAYER2);
     tennis_point(PLAYER1);
 
     TEST_ASSERT_EQUAL(false, tennis_is_advantage(PLAYER2));
-    TEST_ASSERT_EQUAL(0, tennis_get_gems(PLAYER2));
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER2));
-    TEST_ASSERT_EQUAL(40, tennis_get_points(PLAYER1));
+    TEST_ASSERT_EQUAL(expectet_gems, tennis_get_gems(PLAYER2));
+    TEST_ASSERT_EQUAL(expectet_points, tennis_get_points(PLAYER2));
+    TEST_ASSERT_EQUAL(expectet_points, tennis_get_points(PLAYER1));
 }
 
 TEST(tennis, Player1_wins_set)
 {
-    for(int i = 0; i < 6; i++)
-    {
-        tennis_point(PLAYER1);
-        tennis_point(PLAYER1);
-        tennis_point(PLAYER1);
-        tennis_point(PLAYER1);
-    }
+    uint8_t expected_sets = 0;
 
-    TEST_ASSERT_EQUAL(1, tennis_get_sets(PLAYER1));
+    expected_sets += set_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
 }
 
 TEST(tennis, Player2_wins_set)
 {
-    for(int i = 0; i < 6; i++)
-    {
-        tennis_point(PLAYER2);
-        tennis_point(PLAYER2);
-        tennis_point(PLAYER2);
-        tennis_point(PLAYER2);
-    }
+    uint8_t expected_sets = 0;
 
-    TEST_ASSERT_EQUAL(1, tennis_get_sets(PLAYER2));
+    expected_sets += set_win(PLAYER2);
+
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER2));
 }
