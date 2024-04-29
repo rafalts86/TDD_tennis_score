@@ -98,9 +98,11 @@ static void tennis_40_points_handle(player_t *player)
 
 static void tennis_gem_win_handle(player_t *player)
 {
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
     tennis_reset_points();
     tennis_add_gem(player);
-    if(6 == tennis_get_player_gems(player))
+    if(6 == tennis_get_player_gems(player) && 5 > tennis_get_player_gems(opposite_player))
     {
         tennis_add_set(player);
     }
