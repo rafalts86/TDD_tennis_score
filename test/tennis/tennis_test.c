@@ -373,9 +373,38 @@ TEST(tennis, Reset_gems_and_points_after_set_win)
 
 TEST(tennis, Tie_break_Player1_wins_7_points_Player2_wins_6_point_no_set_win)
 {
+    uint8_t expected_sets = 0;
+    uint8_t expected_advantage = true;
+
+    tie_break();
+
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER2);
+
+    point_win_during_tie_break(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER1));
+}
+
+TEST(tennis, Tie_break_Player1_wins_after_advantage)
+{
     uint8_t expected_points_player1 = 0;
     uint8_t expected_points_player2 = 0;
-    uint8_t expected_sets = 0;
+    uint8_t expected_sets = 1;
+    uint8_t expected_advantage = false;
 
     tie_break();
 
@@ -395,10 +424,12 @@ TEST(tennis, Tie_break_Player1_wins_7_points_Player2_wins_6_point_no_set_win)
     expected_points_player2 += point_win_during_tie_break(PLAYER2);
 
     expected_points_player1 += point_win_during_tie_break(PLAYER1);
+    expected_points_player2 += point_win_during_tie_break(PLAYER2);
 
-    TEST_ASSERT_EQUAL(expected_points_player1, tennis_get_points(PLAYER1));
-    TEST_ASSERT_EQUAL(expected_points_player2, tennis_get_points(PLAYER2));
+    expected_points_player1 += point_win_during_tie_break(PLAYER1);
+    expected_points_player1 += point_win_during_tie_break(PLAYER1);
+
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER1));
 }
 
-//tie-break win after advantage
