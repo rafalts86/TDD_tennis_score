@@ -353,5 +353,20 @@ TEST(tennis, Player1_wins_set_after_tie_break)
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
 }
 
+TEST(tennis, Reset_gems_and_points_after_set_win)
+{
+    uint8_t expected_gems = 0;
+    uint8_t expected_points = 0;
+    uint8_t expected_sets = 1;
 
-//reset gems after set win
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+
+    gems_win(PLAYER1, 2);
+
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_gems, tennis_get_gems(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_gems, tennis_get_gems(PLAYER2));
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER2));
+}

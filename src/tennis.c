@@ -148,7 +148,7 @@ static void tennis_set_win_check(player_t *player)
 static void tennis_reset_gems(void)
 {
     player1.gems = 0;
-    player1.gems = 0;
+    player2.gems = 0;
 }
 
 static void tennis_add_1_point(player_t *player)
