@@ -12,6 +12,16 @@ uint8_t gem_win(enum player player)
     return 1;
 }
 
+uint8_t gems_win(enum player player, uint8_t no_gems)
+{
+    for(uint8_t i = 0; i < no_gems; i++)
+    {
+        gem_win(player);
+    }
+
+    return 1;
+}
+
 uint8_t set_win(enum player player)
 {
     for(uint8_t i = 0; i < 6; i++)
@@ -270,4 +280,15 @@ TEST(tennis, Player2_wins_set)
     expected_sets += set_win(PLAYER2);
 
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER2));
+}
+
+TEST(tennis, Player1_6gems_Player2_5gems_no_set_for_player1)
+{
+    uint8_t expected_sets = 0;
+
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+    gem_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(0, tennis_get_sets(PLAYER1));
 }
