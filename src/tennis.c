@@ -28,6 +28,7 @@ static void tennis_add_set(player_t *player);
 static uint8_t tennis_get_player_gems(player_t *player);
 static void tennis_gem_win_handle(player_t *player);
 static void tennis_set_win_check(player_t *player);
+static void tennis_add_1_point(player_t *player);
 
 void tennis_init(void)
 {
@@ -58,21 +59,29 @@ void tennis_point(enum player player)
 
 static void tennis_point_handle(player_t *player)
 {
-    switch(player->points)
+    if(REGULAR == state)
     {
-        case 0:
-        case 15:
-            tennis_add_15_points(player);
-            break;
-        
-        case 30:
-            tennis_add_10_points(player);
-            break;
+        switch(player->points)
+        {
+            case 0:
+            case 15:
+                tennis_add_15_points(player);
+                break;
+            
+            case 30:
+                tennis_add_10_points(player);
+                break;
 
-        case 40:
-            tennis_40_points_handle(player);
-            break;
+            case 40:
+                tennis_40_points_handle(player);
+                break;
+        }
     }
+    else if(TIE_BREAK == state)
+    {
+        tennis_add_1_point(player);
+    }
+
 }
 
 static void tennis_40_points_handle(player_t *player)
@@ -121,6 +130,11 @@ static void tennis_set_win_check(player_t *player)
     {
         state = TIE_BREAK;
     }
+}
+
+static void tennis_add_1_point(player_t *player)
+{
+    player->points++;
 }
 
 static uint8_t tennis_get_player_gems(player_t *player)

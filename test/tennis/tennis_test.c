@@ -63,6 +63,14 @@ uint8_t point_win_during_tie_break(enum player player)
     return 1;
 }
 
+void tie_break(void)
+{
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+    gem_win(PLAYER2);
+    gem_win(PLAYER1);
+}
+
 void advantage(enum player player)
 {
     if(player == PLAYER1)
@@ -315,10 +323,7 @@ TEST(tennis, Player1_6gems_Player2_6gems_tie_break)
 {
     game_state_t expected_state = TIE_BREAK;
 
-    gems_win(PLAYER1, 5);
-    gems_win(PLAYER2, 5);
-    gem_win(PLAYER2);
-    gem_win(PLAYER1);
+    tie_break();
 
     TEST_ASSERT_EQUAL(expected_state, tennis_get_state());
 }
@@ -327,7 +332,9 @@ TEST(tennis, Player1_wins_point_during_tie_break)
 {
     uint8_t expected_points = 0;
 
-    expected_points += point_win_during_tie_break(PLAYER1);
+    tie_break();
 
+    expected_points += point_win_during_tie_break(PLAYER1);
+    
     TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
 }
