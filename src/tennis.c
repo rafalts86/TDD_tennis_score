@@ -28,7 +28,9 @@ static void tennis_add_set(player_t *player);
 static uint8_t tennis_get_player_gems(player_t *player);
 static void tennis_gem_win_handle(player_t *player);
 static void tennis_set_win_check(player_t *player);
-static void tennis_add_1_point(player_t *player);
+static void tennis_add_1_point(player_t *player);\
+static void tennis_set_win_handle(player_t *player);
+static void tennis_reset_gems(void);
 
 void tennis_init(void)
 {
@@ -80,6 +82,10 @@ static void tennis_point_handle(player_t *player)
     else if(TIE_BREAK == state)
     {
         tennis_add_1_point(player);
+        if(player->points == 7)
+        {
+            tennis_set_win_handle(player);
+        }
     }
 
 }
@@ -117,6 +123,13 @@ static void tennis_gem_win_handle(player_t *player)
     tennis_set_win_check(player);
 }
 
+static void tennis_set_win_handle(player_t *player)
+{
+    tennis_add_set(player);
+    tennis_reset_points();
+    tennis_reset_gems();
+}
+
 static void tennis_set_win_check(player_t *player)
 {
     player_t *opposite_player = tennis_get_opposite_player(player);
@@ -124,12 +137,18 @@ static void tennis_set_win_check(player_t *player)
     if(6 == tennis_get_player_gems(player) && 5 > tennis_get_player_gems(opposite_player) || 
        7 == tennis_get_player_gems(player) && 5 == tennis_get_player_gems(opposite_player))
     {
-        tennis_add_set(player);
+        tennis_set_win_handle(player);
     }
     else if(6 == tennis_get_player_gems(player) && 6 == tennis_get_player_gems(opposite_player))
     {
         state = TIE_BREAK;
     }
+}
+
+static void tennis_reset_gems(void)
+{
+    player1.gems = 0;
+    player1.gems = 0;
 }
 
 static void tennis_add_1_point(player_t *player)

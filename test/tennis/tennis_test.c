@@ -341,20 +341,15 @@ TEST(tennis, Player1_wins_point_during_tie_break)
 
 TEST(tennis, Player1_wins_set_after_tie_break)
 {
-    uint8_t expected_points = 0;
     uint8_t expected_sets = 1;
 
     tie_break();
 
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-    expected_points += point_win_during_tie_break(PLAYER1);
-
-    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
+    for(int i = 0; i < 7; i++)
+    {
+        point_win_during_tie_break(PLAYER1);
+    }
+    
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
 }
 
