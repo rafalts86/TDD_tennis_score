@@ -23,4 +23,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player2_wins_set);
    RUN_TEST_CASE(tennis, Player1_6gems_Player2_5gems_no_set_for_player1);
    RUN_TEST_CASE(tennis, Player1_7gems_Player2_5gems_set_for_player1);
+   RUN_TEST_CASE(tennis, Player1_6gems_Player2_6gems_tie_break);
 }

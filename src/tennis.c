@@ -11,6 +11,8 @@ typedef struct
 static player_t player1;
 static player_t player2;
 
+game_state_t state;
+
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
 static void tennis_add_15_points(player_t *player);
@@ -38,6 +40,8 @@ void tennis_init(void)
     player2.gems = 0;
     player2.sets = 0;
     player2.is_advantage = false;
+
+    state = REGULAR;
 }
 
 void tennis_point(enum player player)
@@ -224,4 +228,9 @@ uint8_t tennis_get_sets(enum player player)
     {
         return player2.sets;
     }
+}
+
+game_state_t tennis_get_state(void)
+{
+    
 }

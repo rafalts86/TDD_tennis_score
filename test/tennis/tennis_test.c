@@ -304,3 +304,15 @@ TEST(tennis, Player1_7gems_Player2_5gems_set_for_player1)
 
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
 }
+
+TEST(tennis, Player1_6gems_Player2_6gems_tie_break)
+{
+    game_state_t expected_state = TIE_BREAK;
+
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+    gem_win(PLAYER2);
+    gem_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_state, tennis_get_state());
+}
