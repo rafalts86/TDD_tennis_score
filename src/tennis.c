@@ -117,6 +117,10 @@ static void tennis_set_win_check(player_t *player)
     {
         tennis_add_set(player);
     }
+    else if(6 == tennis_get_player_gems(player) && 6 == tennis_get_player_gems(opposite_player))
+    {
+        state = TIE_BREAK;
+    }
 }
 
 static uint8_t tennis_get_player_gems(player_t *player)
@@ -232,5 +236,5 @@ uint8_t tennis_get_sets(enum player player)
 
 game_state_t tennis_get_state(void)
 {
-    
+    return state;
 }
