@@ -25,6 +25,7 @@ static void tennis_add_gem(player_t *player);
 static void tennis_add_set(player_t *player);
 static uint8_t tennis_get_player_gems(player_t *player);
 static void tennis_gem_win_handle(player_t *player);
+static void tennis_set_win_check(player_t *player);
 
 void tennis_init(void)
 {
@@ -98,10 +99,15 @@ static void tennis_40_points_handle(player_t *player)
 
 static void tennis_gem_win_handle(player_t *player)
 {
-    player_t *opposite_player = tennis_get_opposite_player(player);
-
     tennis_reset_points();
     tennis_add_gem(player);
+    tennis_set_win_check(player);
+}
+
+static void tennis_set_win_check(player_t *player)
+{
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
     if(6 == tennis_get_player_gems(player) && 5 > tennis_get_player_gems(opposite_player) || 
        7 == tennis_get_player_gems(player) && 5 == tennis_get_player_gems(opposite_player))
     {
