@@ -83,16 +83,15 @@ static void tennis_point_handle(player_t *player)
     {
         player_t *opposite_player = tennis_get_opposite_player(player);
 
-        if(player->points < 7)
+        if(player->points < 6)
         {
             tennis_add_1_point(player);
         }
-
-        if(player->points == 7 && opposite_player->points < 6)
+        else if(player->points == 6 && opposite_player->points < 6)
         {
             tennis_set_win_handle(player);
         }
-        else if(player->points == 7 && opposite_player->points == 6)
+        else if(player->points == opposite_player->points && player->is_advantage == false && opposite_player->is_advantage == false)
         {
             tennis_set_advantage(player);
         }
@@ -101,7 +100,10 @@ static void tennis_point_handle(player_t *player)
             tennis_reset_advantage(player);
             tennis_set_win_handle(player);
         }
-  
+        else if(true == opposite_player->is_advantage)
+        {
+            tennis_reset_advantage(opposite_player);
+        }
     }
 
 }
