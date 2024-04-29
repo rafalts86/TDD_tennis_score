@@ -81,8 +81,11 @@ static void tennis_point_handle(player_t *player)
     }
     else if(TIE_BREAK == state)
     {
+        player_t *opposite_player = tennis_get_opposite_player(player);
+
         tennis_add_1_point(player);
-        if(player->points == 7)
+
+        if(player->points == 7 && opposite_player->points < 6)
         {
             tennis_set_win_handle(player);
         }
