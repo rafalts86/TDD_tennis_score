@@ -526,3 +526,34 @@ TEST(tennis, Tie_break_Player2_wins_after_advantage)
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER2));
     TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER2));
 }
+
+TEST(tennis, Tie_break_Player2_advantage_and_player1_wins_point)
+{
+    uint8_t expected_sets = 0;
+    uint8_t expected_advantage = false;
+
+    tie_break();
+
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER1);
+
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER2);
+
+    point_win_during_tie_break(PLAYER1);
+    point_win_during_tie_break(PLAYER2);
+
+    point_win_during_tie_break(PLAYER2);
+    point_win_during_tie_break(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER2));
+    TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER2));
+}
