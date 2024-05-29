@@ -31,6 +31,8 @@ static void tennis_set_win_check(player_t *player);
 static void tennis_add_1_point(player_t *player);\
 static void tennis_set_win_handle(player_t *player);
 static void tennis_reset_gems(void);
+static void tennis_regular_point_handle(player_t *player);
+static void tennis_tie_break_point_handle(player_t *player);
 
 void tennis_init(void)
 {
@@ -63,49 +65,58 @@ static void tennis_point_handle(player_t *player)
 {
     if(REGULAR == state)
     {
-        switch(player->points)
-        {
-            case 0:
-            case 15:
-                tennis_add_15_points(player);
-                break;
-            
-            case 30:
-                tennis_add_10_points(player);
-                break;
-
-            case 40:
-                tennis_40_points_handle(player);
-                break;
-        }
+        tennis_regular_point_handle(player);
     }
     else if(TIE_BREAK == state)
     {
-        player_t *opposite_player = tennis_get_opposite_player(player);
-
-        if(player->points < 6)
-        {
-            tennis_add_1_point(player);
-        }
-        else if(player->points == 6 && opposite_player->points < 6)
-        {
-            tennis_set_win_handle(player);
-        }
-        else if(player->points == opposite_player->points && player->is_advantage == false && opposite_player->is_advantage == false)
-        {
-            tennis_set_advantage(player);
-        }
-        else if(true == player->is_advantage)
-        {
-            tennis_reset_advantage(player);
-            tennis_set_win_handle(player);
-        }
-        else if(true == opposite_player->is_advantage)
-        {
-            tennis_reset_advantage(opposite_player);
-        }
+        tennis_tie_break_point_handle(player);
     }
+}
 
+static void tennis_regular_point_handle(player_t *player)
+{
+    switch(player->points)
+    {
+        case 0:
+        case 15:
+            tennis_add_15_points(player);
+            break;
+        
+        case 30:
+            tennis_add_10_points(player);
+            break;
+
+        case 40:
+            tennis_40_points_handle(player);
+            break;
+    }
+}
+
+static void tennis_tie_break_point_handle(player_t *player)
+{
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
+    if(player->points < 6)
+    {
+        tennis_add_1_point(player);
+    }
+    else if(player->points == 6 && opposite_player->points < 6)
+    {
+        tennis_set_win_handle(player);
+    }
+    else if(player->points == opposite_player->points && player->is_advantage == false && opposite_player->is_advantage == false)
+    {
+        tennis_set_advantage(player);
+    }
+    else if(true == player->is_advantage)
+    {
+        tennis_reset_advantage(player);
+        tennis_set_win_handle(player);
+    }
+    else if(true == opposite_player->is_advantage)
+    {
+        tennis_reset_advantage(opposite_player);
+    }
 }
 
 static void tennis_40_points_handle(player_t *player)

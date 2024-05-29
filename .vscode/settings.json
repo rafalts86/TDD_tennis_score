@@ -5,5 +5,5 @@
         "stdint.h": "c",
         "stdbool.h": "c"
     },
-    "cmake.sourceDirectory": "D:/TDD_SZKOLENIE/Tennis/test/tennis"
+    "cmake.sourceDirectory": "C:/Users/Gosia/Documents/VSC/TDD_tennis_score/test/tennis"
 }
