@@ -573,3 +573,11 @@ TEST(tennis, Save_gems_to_score_table_after_third_set_win)
     TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 3));
     TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 3));
 }
+
+TEST(tennis, Player1_wins_state_match_ended)
+{
+    set_win(PLAYER1);
+    set_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
+}

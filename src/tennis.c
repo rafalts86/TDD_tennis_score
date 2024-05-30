@@ -11,9 +11,9 @@ typedef struct
 static player_t player1;
 static player_t player2;
 
-game_state_t state;
+static game_state_t state;
 
-uint8_t score_table[3][2];
+static uint8_t score_table[3][2];
 
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
@@ -36,7 +36,7 @@ static void tennis_reset_gems(void);
 static void tennis_regular_point_handle(player_t *player);
 static void tennis_tie_break_point_handle(player_t *player);
 static void tennis_score_table_save(void);
-
+static void tennis_match_win_check(player_t *player);
 
 void tennis_init(void)
 {
@@ -163,6 +163,7 @@ static void tennis_set_win_handle(player_t *player)
     tennis_score_table_save();
     tennis_reset_points();
     tennis_reset_gems();
+    tennis_match_win_check(player);
 }
 
 static void tennis_set_win_check(player_t *player)
@@ -318,4 +319,12 @@ static void tennis_score_table_save(void)
 
     score_table[PLAYER1][set_no - 1] = player1.gems;
     score_table[PLAYER2][set_no - 1] = player2.gems;
+}
+
+static void tennis_match_win_check(player_t *player)
+{
+    if(2 == player->sets)
+    {
+        state = MATCH_ENDED;
+    }
 }

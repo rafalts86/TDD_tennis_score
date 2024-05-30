@@ -5,6 +5,7 @@ typedef enum
 {
     REGULAR,
     TIE_BREAK,
+    MATCH_ENDED
 } game_state_t;
 
 enum player
