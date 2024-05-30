@@ -520,3 +520,17 @@ TEST(tennis, Read_gems_from_score_table_after_init)
     TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 3));
     TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 3));
 }
+
+TEST(tennis, Save_gems_to_score_table_after_set_win)
+{
+    uint8_t player1_expected_gems = 5;
+    uint8_t player2_expected_gems = 7;
+
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+    gems_win(PLAYER2, 1);
+    gems_win(PLAYER2, 1);
+
+    TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 1));
+    TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 1));
+}
