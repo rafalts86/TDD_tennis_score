@@ -329,6 +329,16 @@ static void tennis_match_win_check(player_t *player)
     if(SETS_TO_WIN_MATCH == player->sets)
     {
         state = MATCH_ENDED;
+
+        if(player == &player1)
+        {
+            winner = PLAYER1;
+        }
+        else 
+        {
+            winner = PLAYER2;
+        }
+        
     }
 }
 
