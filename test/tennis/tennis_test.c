@@ -589,3 +589,17 @@ TEST(tennis, Player2_wins_state_match_ended)
 
     TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
 }
+
+TEST(tennis, Match_ended_no_more_points_for_players)
+{
+    uint8_t expected_points = 0;
+
+    set_win(PLAYER2);
+    set_win(PLAYER2);
+
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
+    TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER2));
+}
