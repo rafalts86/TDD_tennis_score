@@ -38,4 +38,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Save_gems_to_score_table_after_second_set_win);
    RUN_TEST_CASE(tennis, Save_gems_to_score_table_after_third_set_win);
    RUN_TEST_CASE(tennis, Player1_wins_state_match_ended);
+   RUN_TEST_CASE(tennis, Player2_wins_state_match_ended);
 }

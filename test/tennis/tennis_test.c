@@ -581,3 +581,11 @@ TEST(tennis, Player1_wins_state_match_ended)
 
     TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
 }
+
+TEST(tennis, Player2_wins_state_match_ended)
+{
+    set_win(PLAYER2);
+    set_win(PLAYER2);
+
+    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
+}
