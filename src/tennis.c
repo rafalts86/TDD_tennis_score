@@ -306,5 +306,5 @@ game_state_t tennis_get_state(void)
 
 uint8_t tennis_get_score_table_gems(enum player player, uint8_t set)
 {
-    
+    return score_table[player][set-1];
 }
