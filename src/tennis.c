@@ -11,9 +11,11 @@ typedef struct
 static player_t player1;
 static player_t player2;
 
+static enum player winner;
+
 static game_state_t state;
 
-static uint8_t score_table[3][2];
+static uint8_t score_table[MAX_SETS_NO][PLAYERS];
 
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
@@ -50,6 +52,7 @@ void tennis_init(void)
     player2.sets = 0;
     player2.is_advantage = false;
 
+    winner = PLAYER_NONE;
     state = REGULAR;
     memset(score_table, 0, 6 * sizeof(uint8_t));
 }
@@ -323,8 +326,13 @@ static void tennis_score_table_save(void)
 
 static void tennis_match_win_check(player_t *player)
 {
-    if(2 == player->sets)
+    if(SETS_TO_WIN_MATCH == player->sets)
     {
         state = MATCH_ENDED;
     }
+}
+
+enum player tennis_winner_get(void)
+{
+    return winner;
 }

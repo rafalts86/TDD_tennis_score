@@ -603,3 +603,11 @@ TEST(tennis, Match_ended_no_more_points_for_players)
     TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER1));
     TEST_ASSERT_EQUAL(expected_points, tennis_get_points(PLAYER2));
 }
+
+TEST(tennis, Player1_wins_winner_is_PLAYER1)
+{
+    set_win(PLAYER1);
+    set_win(PLAYER1);
+
+    TEST_ASSERT_EQUAL(PLAYER1, tennis_winner_get());
+}

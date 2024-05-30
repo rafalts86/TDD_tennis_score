@@ -1,6 +1,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define PLAYERS                 2
+#define MAX_SETS_NO             5
+
+#define SETS_TO_WIN_MATCH       2       //womens
+//#define SETS_TO_WIN_MATCH     3       //mens
+
 typedef enum
 {
     REGULAR,
@@ -10,6 +16,7 @@ typedef enum
 
 enum player
 {
+    PLAYER_NONE = -1,
     PLAYER1,
     PLAYER2,
 };
@@ -22,3 +29,4 @@ uint8_t tennis_get_sets(enum player player);
 bool tennis_is_advantage(enum player player);
 game_state_t tennis_get_state(void);
 uint8_t tennis_get_score_table_gems(enum player player, uint8_t set);
+enum player tennis_winner_get(void);
