@@ -13,6 +13,8 @@ static player_t player2;
 
 game_state_t state;
 
+uint8_t score_table[3][2] = {0};
+
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
 static void tennis_add_15_points(player_t *player);
@@ -33,6 +35,7 @@ static void tennis_set_win_handle(player_t *player);
 static void tennis_reset_gems(void);
 static void tennis_regular_point_handle(player_t *player);
 static void tennis_tie_break_point_handle(player_t *player);
+
 
 void tennis_init(void)
 {
@@ -299,4 +302,9 @@ uint8_t tennis_get_sets(enum player player)
 game_state_t tennis_get_state(void)
 {
     return state;
+}
+
+uint8_t tennis_get_score_table_gems(enum player player, uint8_t set)
+{
+    
 }

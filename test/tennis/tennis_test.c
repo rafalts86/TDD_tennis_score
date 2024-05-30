@@ -507,3 +507,16 @@ TEST(tennis, Tie_break_Player2_advantage_and_player1_wins_point)
     TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER1));
     TEST_ASSERT_EQUAL(expected_advantage, tennis_is_advantage(PLAYER2));
 }
+
+TEST(tennis, Read_gems_from_score_table_after_init)
+{
+    uint8_t player1_expected_gems = 0;
+    uint8_t player2_expected_gems = 0;
+
+    TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 1));
+    TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 1));
+    TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 2));
+    TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 2));
+    TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 3));
+    TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 3));
+}

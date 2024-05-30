@@ -33,4 +33,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Tie_break_Player2_wins_7_points_Player1_wins_6_point_no_set_win);
    RUN_TEST_CASE(tennis, Tie_break_Player2_wins_after_advantage);
    RUN_TEST_CASE(tennis, Tie_break_Player2_advantage_and_player1_wins_point);
+   RUN_TEST_CASE(tennis, Read_gems_from_score_table_after_init);
 }
