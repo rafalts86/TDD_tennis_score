@@ -611,3 +611,12 @@ TEST(tennis, Player1_wins_winner_is_PLAYER1)
 
     TEST_ASSERT_EQUAL(PLAYER1, tennis_winner_get());
 }
+
+TEST(tennis, Player2_wins_winner_is_PLAYER2)
+{
+    set_win(PLAYER2);
+    set_win(PLAYER1);
+    set_win(PLAYER2);
+
+    TEST_ASSERT_EQUAL(PLAYER2, tennis_winner_get());
+}
