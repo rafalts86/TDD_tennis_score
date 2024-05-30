@@ -530,7 +530,7 @@ TEST(tennis, Save_gems_to_score_table_after_set_win)
     gems_win(PLAYER2, 5);
     gems_win(PLAYER2, 1);
     gems_win(PLAYER2, 1);
-
+    
     TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 1));
     TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 1));
 }

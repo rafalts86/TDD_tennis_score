@@ -13,7 +13,7 @@ static player_t player2;
 
 game_state_t state;
 
-uint8_t score_table[3][2] = {0};
+uint8_t score_table[3][2];
 
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
@@ -35,6 +35,7 @@ static void tennis_set_win_handle(player_t *player);
 static void tennis_reset_gems(void);
 static void tennis_regular_point_handle(player_t *player);
 static void tennis_tie_break_point_handle(player_t *player);
+static void tennis_score_table_save(void);
 
 
 void tennis_init(void)
@@ -50,6 +51,7 @@ void tennis_init(void)
     player2.is_advantage = false;
 
     state = REGULAR;
+    memset(score_table, 0, 6 * sizeof(uint8_t));
 }
 
 void tennis_point(enum player player)
@@ -158,6 +160,7 @@ static void tennis_gem_win_handle(player_t *player)
 static void tennis_set_win_handle(player_t *player)
 {
     tennis_add_set(player);
+    tennis_score_table_save();
     tennis_reset_points();
     tennis_reset_gems();
 }
@@ -307,4 +310,12 @@ game_state_t tennis_get_state(void)
 uint8_t tennis_get_score_table_gems(enum player player, uint8_t set)
 {
     return score_table[player][set-1];
+}
+
+static void tennis_score_table_save(void)
+{
+    uint8_t set_no = player1.sets + player2.sets;
+
+    score_table[PLAYER1][set_no - 1] = player1.gems;
+    score_table[PLAYER2][set_no - 1] = player2.gems;
 }
