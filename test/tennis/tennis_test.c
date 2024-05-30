@@ -530,7 +530,31 @@ TEST(tennis, Save_gems_to_score_table_after_set_win)
     gems_win(PLAYER2, 5);
     gems_win(PLAYER2, 1);
     gems_win(PLAYER2, 1);
-    
+
     TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 1));
     TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 1));
+}
+
+TEST(tennis, Save_gems_to_score_table_after_second_set_win)
+{
+    uint8_t player1_expected_gems_set1 = 5;
+    uint8_t player2_expected_gems_set1 = 7;
+
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 5);
+    gems_win(PLAYER2, 1);
+    gems_win(PLAYER2, 1);
+
+    uint8_t player1_expected_gems_set2 = 6;
+    uint8_t player2_expected_gems_set2 = 3;
+
+    gems_win(PLAYER2, 2);
+    gems_win(PLAYER1, 5);
+    gems_win(PLAYER2, 1);
+    gems_win(PLAYER1, 1);
+
+    TEST_ASSERT_EQUAL(player1_expected_gems_set1, tennis_get_score_table_gems(PLAYER1, 1));
+    TEST_ASSERT_EQUAL(player2_expected_gems_set1, tennis_get_score_table_gems(PLAYER2, 1));
+    TEST_ASSERT_EQUAL(player1_expected_gems_set2, tennis_get_score_table_gems(PLAYER1, 2));
+    TEST_ASSERT_EQUAL(player2_expected_gems_set2, tennis_get_score_table_gems(PLAYER2, 2));
 }
