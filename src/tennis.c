@@ -345,3 +345,8 @@ enum player tennis_winner_get(void)
 {
     return winner;
 }
+
+uint8_t tennis_get_current_set(void)
+{
+    return player1.sets + player2.sets + 1;
+}

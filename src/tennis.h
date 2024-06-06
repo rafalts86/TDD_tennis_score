@@ -4,8 +4,8 @@
 #define PLAYERS                 2
 #define MAX_SETS_NO             5
 
-#define SETS_TO_WIN_MATCH       2       //womens
-//#define SETS_TO_WIN_MATCH     3       //mens
+#define SETS_TO_WIN_MATCH       2       //women
+//#define SETS_TO_WIN_MATCH     3       //men
 
 typedef enum
 {
@@ -30,3 +30,4 @@ bool tennis_is_advantage(enum player player);
 game_state_t tennis_get_state(void);
 uint8_t tennis_get_score_table_gems(enum player player, uint8_t set);
 enum player tennis_winner_get(void);
+uint8_t tennis_get_current_set(void);
