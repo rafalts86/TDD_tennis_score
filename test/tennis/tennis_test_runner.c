@@ -26,6 +26,7 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player1_6gems_Player2_6gems_tie_break);
    RUN_TEST_CASE(tennis, Player1_wins_point_during_tie_break);
    RUN_TEST_CASE(tennis, Player1_wins_set_after_tie_break);
+   RUN_TEST_CASE(tennis, Player1_wins_set_after_tie_break_new_status_regular);
    RUN_TEST_CASE(tennis, Reset_gems_and_points_after_set_win);
    RUN_TEST_CASE(tennis, Tie_break_Player1_wins_7_points_Player2_wins_6_point_no_set_win);
    RUN_TEST_CASE(tennis, Tie_break_Player1_wins_after_advantage);

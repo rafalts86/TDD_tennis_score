@@ -363,6 +363,18 @@ TEST(tennis, Player1_wins_set_after_tie_break)
     TEST_ASSERT_EQUAL(expected_sets, tennis_get_sets(PLAYER1));
 }
 
+TEST(tennis, Player1_wins_set_after_tie_break_new_status_regular)
+{
+    tie_break();
+
+    for(int i = 0; i < 7; i++)
+    {
+        point_win_during_tie_break(PLAYER1);
+    }
+    
+    TEST_ASSERT_EQUAL(REGULAR, tennis_get_state);
+}
+
 TEST(tennis, Reset_gems_and_points_after_set_win)
 {
     uint8_t expected_gems = 0;
