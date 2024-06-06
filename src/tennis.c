@@ -339,6 +339,10 @@ static void tennis_match_win_check(player_t *player)
             winner = PLAYER2;
         }
     }
+    else
+    {
+        state = REGULAR;
+    }
 }
 
 enum player tennis_winner_get(void)
