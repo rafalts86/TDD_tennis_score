@@ -16,7 +16,7 @@ static enum player winner;
 
 static game_state_t state;
 
-static uint8_t score_table[MAX_SETS_NO][PLAYERS];
+static uint8_t score_table[PLAYERS][MAX_SETS_NO];
 
 static void tennis_point_handle(player_t *player);
 static player_t *tennis_get_opposite_player(player_t *player);
