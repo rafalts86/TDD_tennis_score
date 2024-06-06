@@ -1,3 +1,4 @@
+#include <string.h>
 #include "tennis.h"
 
 typedef struct
@@ -173,8 +174,8 @@ static void tennis_set_win_check(player_t *player)
 {
     player_t *opposite_player = tennis_get_opposite_player(player);
 
-    if(6 == tennis_get_player_gems(player) && 5 > tennis_get_player_gems(opposite_player) || 
-       7 == tennis_get_player_gems(player) && 5 == tennis_get_player_gems(opposite_player))
+    if(((6 == tennis_get_player_gems(player)) && 5 > (tennis_get_player_gems(opposite_player))) || 
+       ((7 == tennis_get_player_gems(player)) && (5 == tennis_get_player_gems(opposite_player))))
     {
         tennis_set_win_handle(player);
     }
@@ -252,10 +253,8 @@ static player_t *tennis_get_opposite_player(player_t *player)
     {
         return &player2;
     }
-    else if(player == &player2)
-    {
-        return &player1;
-    }
+
+    return &player1;
 }
 
 uint8_t tennis_get_points(enum player player)
@@ -264,10 +263,8 @@ uint8_t tennis_get_points(enum player player)
     {
         return player1.points;
     }
-    else if(player == PLAYER2)
-    {
-        return player2.points;
-    }
+
+    return player2.points;
 }
 
 uint8_t tennis_get_gems(enum player player)
@@ -276,10 +273,8 @@ uint8_t tennis_get_gems(enum player player)
     {
         return player1.gems;
     }
-    else if(player == PLAYER2)
-    {
-        return player2.gems;
-    }
+
+    return player2.gems;
 }
 
 bool tennis_is_advantage(enum player player)
@@ -288,10 +283,8 @@ bool tennis_is_advantage(enum player player)
     {
         return player1.is_advantage;
     }
-    else if(player == PLAYER2)
-    {
-        return player2.is_advantage;
-    }
+
+    return player2.is_advantage;
 }
 
 uint8_t tennis_get_sets(enum player player)
@@ -300,10 +293,8 @@ uint8_t tennis_get_sets(enum player player)
     {
         return player1.sets;
     }
-    else if(player == PLAYER2)
-    {
-        return player2.sets;
-    }
+
+    return player2.sets;
 }
 
 game_state_t tennis_get_state(void)
