@@ -41,6 +41,7 @@ static void tennis_regular_point_handle(player_t *player);
 static void tennis_tie_break_point_handle(player_t *player);
 static void tennis_score_table_save(void);
 static void tennis_match_win_check(player_t *player);
+static void tennis_change_player_to_serve(void);
 
 void tennis_init(void)
 {
@@ -162,6 +163,7 @@ static void tennis_game_win_handle(player_t *player)
 {
     tennis_reset_points();
     tennis_add_game(player);
+    tennis_change_player_to_serve();
     tennis_set_win_check(player);
 }
 
@@ -353,4 +355,16 @@ uint8_t tennis_get_current_set(void)
 enum player tennis_get_player_to_serve(void)
 {
     return player_to_serve;
+}
+
+static void tennis_change_player_to_serve(void)
+{
+    if(PLAYER1 == player_to_serve)
+    {
+        player_to_serve = PLAYER2;
+    }
+    else
+    {
+        player_to_serve = PLAYER1;
+    }
 }
