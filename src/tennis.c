@@ -111,6 +111,7 @@ static void tennis_tie_break_point_handle(player_t *player)
     }
     else if(player->points == 6 && opposite_player->points < 6)
     {
+        tennis_add_gem(player);
         tennis_set_win_handle(player);
     }
     else if(player->points == opposite_player->points && player->is_advantage == false && opposite_player->is_advantage == false)
@@ -120,6 +121,7 @@ static void tennis_tie_break_point_handle(player_t *player)
     else if(true == player->is_advantage)
     {
         tennis_reset_advantage(player);
+        tennis_add_gem(player);
         tennis_set_win_handle(player);
     }
     else if(true == opposite_player->is_advantage)
