@@ -4,7 +4,7 @@
 typedef struct
 {
   uint8_t points;
-  uint8_t gems;
+  uint8_t games;
   uint8_t sets;
   bool is_advantage;
 } player_t;
@@ -28,14 +28,14 @@ static bool tennis_is_player_advantage(player_t *player);
 static void tennis_set_advantage(player_t *player);
 static void tennis_reset_advantage(player_t *player);
 static void tennis_reset_points(void);
-static void tennis_add_gem(player_t *player);
+static void tennis_add_game(player_t *player);
 static void tennis_add_set(player_t *player);
-static uint8_t tennis_get_player_gems(player_t *player);
-static void tennis_gem_win_handle(player_t *player);
+static uint8_t tennis_get_player_games(player_t *player);
+static void tennis_game_win_handle(player_t *player);
 static void tennis_set_win_check(player_t *player);
 static void tennis_add_1_point(player_t *player);\
 static void tennis_set_win_handle(player_t *player);
-static void tennis_reset_gems(void);
+static void tennis_reset_games(void);
 static void tennis_regular_point_handle(player_t *player);
 static void tennis_tie_break_point_handle(player_t *player);
 static void tennis_score_table_save(void);
@@ -44,12 +44,12 @@ static void tennis_match_win_check(player_t *player);
 void tennis_init(void)
 {
     player1.points = 0;
-    player1.gems = 0;
+    player1.games = 0;
     player1.sets = 0;
     player1.is_advantage = false;
 
     player2.points = 0;
-    player2.gems = 0;
+    player2.games = 0;
     player2.sets = 0;
     player2.is_advantage = false;
 
@@ -111,7 +111,7 @@ static void tennis_tie_break_point_handle(player_t *player)
     }
     else if(player->points == 6 && opposite_player->points < 6)
     {
-        tennis_add_gem(player);
+        tennis_add_game(player);
         tennis_set_win_handle(player);
     }
     else if(player->points == opposite_player->points && player->is_advantage == false && opposite_player->is_advantage == false)
@@ -121,7 +121,7 @@ static void tennis_tie_break_point_handle(player_t *player)
     else if(true == player->is_advantage)
     {
         tennis_reset_advantage(player);
-        tennis_add_gem(player);
+        tennis_add_game(player);
         tennis_set_win_handle(player);
     }
     else if(true == opposite_player->is_advantage)
@@ -147,19 +147,19 @@ static void tennis_40_points_handle(player_t *player)
         else if(true == tennis_is_player_advantage(player))
         {
             tennis_reset_advantage(player);
-            tennis_gem_win_handle(player);
+            tennis_game_win_handle(player);
         }
     }
     else
     {
-       tennis_gem_win_handle(player);
+       tennis_game_win_handle(player);
     }
 }
 
-static void tennis_gem_win_handle(player_t *player)
+static void tennis_game_win_handle(player_t *player)
 {
     tennis_reset_points();
-    tennis_add_gem(player);
+    tennis_add_game(player);
     tennis_set_win_check(player);
 }
 
@@ -168,7 +168,7 @@ static void tennis_set_win_handle(player_t *player)
     tennis_add_set(player);
     tennis_score_table_save();
     tennis_reset_points();
-    tennis_reset_gems();
+    tennis_reset_games();
     tennis_match_win_check(player);
 }
 
@@ -176,21 +176,21 @@ static void tennis_set_win_check(player_t *player)
 {
     player_t *opposite_player = tennis_get_opposite_player(player);
 
-    if(((6 == tennis_get_player_gems(player)) && 5 > (tennis_get_player_gems(opposite_player))) || 
-       ((7 == tennis_get_player_gems(player)) && (5 == tennis_get_player_gems(opposite_player))))
+    if(((6 == tennis_get_player_games(player)) && 5 > (tennis_get_player_games(opposite_player))) || 
+       ((7 == tennis_get_player_games(player)) && (5 == tennis_get_player_games(opposite_player))))
     {
         tennis_set_win_handle(player);
     }
-    else if(6 == tennis_get_player_gems(player) && 6 == tennis_get_player_gems(opposite_player))
+    else if(6 == tennis_get_player_games(player) && 6 == tennis_get_player_games(opposite_player))
     {
         state = TIE_BREAK;
     }
 }
 
-static void tennis_reset_gems(void)
+static void tennis_reset_games(void)
 {
-    player1.gems = 0;
-    player2.gems = 0;
+    player1.games = 0;
+    player2.games = 0;
 }
 
 static void tennis_add_1_point(player_t *player)
@@ -198,9 +198,9 @@ static void tennis_add_1_point(player_t *player)
     player->points++;
 }
 
-static uint8_t tennis_get_player_gems(player_t *player)
+static uint8_t tennis_get_player_games(player_t *player)
 {
-    return player->gems;
+    return player->games;
 }
 
 static void tennis_add_set(player_t *player)
@@ -208,9 +208,9 @@ static void tennis_add_set(player_t *player)
     player->sets++;
 }
 
-static void tennis_add_gem(player_t *player)
+static void tennis_add_game(player_t *player)
 {
-    player->gems++;
+    player->games++;
 }
 
 static void tennis_reset_points(void)
@@ -269,14 +269,14 @@ uint8_t tennis_get_points(enum player player)
     return player2.points;
 }
 
-uint8_t tennis_get_gems(enum player player)
+uint8_t tennis_get_games(enum player player)
 {
     if(player == PLAYER1)
     {
-        return player1.gems;
+        return player1.games;
     }
 
-    return player2.gems;
+    return player2.games;
 }
 
 bool tennis_is_advantage(enum player player)
@@ -304,7 +304,7 @@ game_state_t tennis_get_state(void)
     return state;
 }
 
-uint8_t tennis_get_score_table_gems(enum player player, uint8_t set)
+uint8_t tennis_get_score_table_games(enum player player, uint8_t set)
 {
     return score_table[player][set-1];
 }
@@ -313,8 +313,8 @@ static void tennis_score_table_save(void)
 {
     uint8_t set_no = player1.sets + player2.sets;
 
-    score_table[PLAYER1][set_no - 1] = player1.gems;
-    score_table[PLAYER2][set_no - 1] = player2.gems;
+    score_table[PLAYER1][set_no - 1] = player1.games;
+    score_table[PLAYER2][set_no - 1] = player2.games;
 }
 
 static void tennis_match_win_check(player_t *player)

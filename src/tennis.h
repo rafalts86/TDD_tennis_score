@@ -24,10 +24,10 @@ enum player
 void tennis_init(void);
 void tennis_point(enum player player);
 uint8_t tennis_get_points(enum player player);
-uint8_t tennis_get_gems(enum player player);
+uint8_t tennis_get_games(enum player player);
 uint8_t tennis_get_sets(enum player player);
 bool tennis_is_advantage(enum player player);
 game_state_t tennis_get_state(void);
-uint8_t tennis_get_score_table_gems(enum player player, uint8_t set);
+uint8_t tennis_get_score_table_games(enum player player, uint8_t set);
 enum player tennis_winner_get(void);
 uint8_t tennis_get_current_set(void);
