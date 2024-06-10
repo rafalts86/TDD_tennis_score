@@ -640,3 +640,9 @@ TEST(tennis, Player2_wins_winner_is_PLAYER2)
 
     TEST_ASSERT_EQUAL(PLAYER2, tennis_winner_get());
 }
+
+TEST (tennis, Player1_is_player_to_serve_after_init)
+{
+    enum player player_to_serve = PLAYER1;
+    TEST_ASSERT_EQUAL(player_to_serve, tennis_get_player_to_serve());
+}

@@ -13,6 +13,7 @@ static player_t player1;
 static player_t player2;
 
 static enum player winner;
+static enum player player_to_serve;
 
 static game_state_t state;
 
@@ -346,4 +347,9 @@ enum player tennis_winner_get(void)
 uint8_t tennis_get_current_set(void)
 {
     return player1.sets + player2.sets + 1;
+}
+
+enum player tennis_get_player_to_serve(void)
+{
+    
 }

@@ -31,3 +31,4 @@ game_state_t tennis_get_state(void);
 uint8_t tennis_get_score_table_games(enum player player, uint8_t set);
 enum player tennis_winner_get(void);
 uint8_t tennis_get_current_set(void);
+enum player tennis_get_player_to_serve(void);
