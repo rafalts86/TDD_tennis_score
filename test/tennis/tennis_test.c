@@ -586,6 +586,14 @@ TEST(tennis, Save_gems_to_score_table_after_third_set_win)
     TEST_ASSERT_EQUAL(player2_expected_gems, tennis_get_score_table_gems(PLAYER2, 3));
 }
 
+TEST(tennis, Save_gems_to_score_table_after_win_in_tie_break)
+{
+    tie_break();
+    uint8_t player1_expected_gems = points_win_during_tie_break(PLAYER1, 7);
+
+    TEST_ASSERT_EQUAL(player1_expected_gems, tennis_get_score_table_gems(PLAYER1, 1));
+}
+
 TEST(tennis, Player1_wins_state_match_ended)
 {
     set_win(PLAYER1);
