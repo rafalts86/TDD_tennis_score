@@ -55,6 +55,7 @@ void tennis_init(void)
     player2.is_advantage = false;
 
     winner = PLAYER_NONE;
+    player_to_serve = PLAYER1;
     state = REGULAR;
     memset(score_table, 0, 6 * sizeof(uint8_t));
 }
@@ -351,5 +352,5 @@ uint8_t tennis_get_current_set(void)
 
 enum player tennis_get_player_to_serve(void)
 {
-    
+    return player_to_serve;
 }
