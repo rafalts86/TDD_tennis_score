@@ -664,3 +664,13 @@ TEST (tennis, Player1_is_player_to_serve_after_second_game)
     
     TEST_ASSERT_EQUAL(player_to_serve, tennis_get_player_to_serve());
 }
+
+TEST (tennis, Player_NONE_is_player_to_serve_after_end_of_match)
+{
+    set_win(PLAYER1);
+    set_win(PLAYER1);
+
+    enum player player_to_serve = PLAYER_NONE;
+
+    TEST_ASSERT_EQUAL(player_to_serve, tennis_get_player_to_serve());
+}
