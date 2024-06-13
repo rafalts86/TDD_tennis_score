@@ -383,7 +383,7 @@ event_t tennis_get_event(void)
 
 static void tennis_match_point_check(void)
 {
-    if(true == tennis_match_point_for_player_check(&player1) || true == tennis_match_point_for_player_check(&player1))
+    if(true == tennis_match_point_for_player_check(&player1) || true == tennis_match_point_for_player_check(&player2))
     {
         event = MATCH_POINT;
     }
@@ -410,7 +410,7 @@ static bool tennis_match_point_for_player_check(player_t *player)
             }
             else if(TIE_BREAK == state)
             {
-                if(6 == player->points && 6 > opposite_player->points)
+                if((6 == player->points && 6 > opposite_player->points) || true == tennis_is_player_advantage(player))
                 {
                     return true;
                 }
