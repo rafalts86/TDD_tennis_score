@@ -399,7 +399,9 @@ static bool tennis_match_point_for_player_check(player_t *player)
     {
         if(5 == player->games)
         {
-            if(40 == player->points)
+            player_t *opposite_player = tennis_get_opposite_player(player);
+            
+            if(40 == player->points && 40 > opposite_player->points)
             {
                 return true;
             }
