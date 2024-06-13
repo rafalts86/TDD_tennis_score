@@ -43,6 +43,7 @@ static void tennis_tie_break_point_handle(player_t *player);
 static void tennis_score_table_save(void);
 static void tennis_match_win_check(player_t *player);
 static void tennis_change_player_to_serve(void);
+static void tennis_match_point_check(player_t *player);
 
 void tennis_init(void)
 {
@@ -98,6 +99,7 @@ static void tennis_regular_point_handle(player_t *player)
         
         case 30:
             tennis_add_10_points(player);
+            tennis_match_point_check(player);
             break;
 
         case 40:
@@ -375,4 +377,18 @@ static void tennis_change_player_to_serve(void)
 event_t tennis_get_event(void)
 {
     return event;
+}
+
+static void tennis_match_point_check(player_t *player)
+{
+    if((SETS_TO_WIN_MATCH - 1) == player->sets)
+    {
+        if(5 == player->games)
+        {
+            if(40 == player->points)
+            {
+                event = MATCH_POINT;
+            }
+        }
+    }
 }
