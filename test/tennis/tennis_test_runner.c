@@ -48,4 +48,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player2_is_player_to_serve_after_first_game);
    RUN_TEST_CASE(tennis, Player1_is_player_to_serve_after_second_game);
    RUN_TEST_CASE(tennis, Player_NONE_is_player_to_serve_after_end_of_match);
+   RUN_TEST_CASE(tennis, EVENT_NONE_after_init);
 }

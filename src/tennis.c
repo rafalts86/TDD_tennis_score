@@ -16,6 +16,7 @@ static enum player winner;
 static enum player player_to_serve;
 
 static game_state_t state;
+static event_t event;
 
 static uint8_t score_table[PLAYERS][MAX_SETS_NO];
 
@@ -368,4 +369,9 @@ static void tennis_change_player_to_serve(void)
     {
         player_to_serve = PLAYER1;
     }
+}
+
+event_t tennis_get_event(void)
+{
+    return -1;
 }

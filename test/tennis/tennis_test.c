@@ -674,3 +674,8 @@ TEST (tennis, Player_NONE_is_player_to_serve_after_end_of_match)
 
     TEST_ASSERT_EQUAL(player_to_serve, tennis_get_player_to_serve());
 }
+
+TEST(tennis, EVENT_NONE_after_init)
+{
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+}
