@@ -679,3 +679,15 @@ TEST(tennis, EVENT_NONE_after_init)
 {
     TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
 }
+
+TEST(tennis, MATCH_POINT_event)
+{
+    set_win(PLAYER1);
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+}

@@ -24,6 +24,7 @@ enum player
 typedef enum
 {
     EVENT_NONE,
+    MATCH_POINT,
 } event_t;
 
 void tennis_init(void);
