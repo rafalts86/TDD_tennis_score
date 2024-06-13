@@ -403,7 +403,7 @@ static bool tennis_match_point_for_player_check(player_t *player)
 
             if(REGULAR == state)
             {
-                if(40 == player->points && 40 > opposite_player->points)
+                if((40 == player->points && 40 > opposite_player->points) || true == tennis_is_player_advantage(player))
                 {
                     return true;
                 }
