@@ -59,6 +59,7 @@ void tennis_init(void)
     winner = PLAYER_NONE;
     player_to_serve = PLAYER1;
     state = REGULAR;
+    event = EVENT_NONE;
     memset(score_table, 0, 6 * sizeof(uint8_t));
 }
 
@@ -373,5 +374,5 @@ static void tennis_change_player_to_serve(void)
 
 event_t tennis_get_event(void)
 {
-    return -1;
+    return event;
 }
