@@ -50,5 +50,6 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, Player_NONE_is_player_to_serve_after_end_of_match);
    RUN_TEST_CASE(tennis, EVENT_NONE_after_init);
    RUN_TEST_CASE(tennis, MATCH_POINT_event);
-   RUN_TEST_CASE(tennis, MATCH_POINT_and_opposte_player_gets_point);
+   RUN_TEST_CASE(tennis, MATCH_POINT_40_0_and_opposte_player_gets_point);
+   RUN_TEST_CASE(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point);
 }

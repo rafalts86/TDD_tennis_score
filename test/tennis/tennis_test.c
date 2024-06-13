@@ -692,7 +692,7 @@ TEST(tennis, MATCH_POINT_event)
     TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
 }
 
-TEST(tennis, MATCH_POINT_and_opposte_player_gets_point)
+TEST(tennis, MATCH_POINT_40_0_and_opposte_player_gets_point)
 {
     set_win(PLAYER1);
     games_win(PLAYER1, 5);
@@ -703,4 +703,19 @@ TEST(tennis, MATCH_POINT_and_opposte_player_gets_point)
     tennis_point(PLAYER2);
 
     TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+}
+
+TEST(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point)
+{
+    set_win(PLAYER1);
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
 }
