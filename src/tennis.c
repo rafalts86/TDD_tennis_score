@@ -87,6 +87,8 @@ static void tennis_point_handle(player_t *player)
     {
         tennis_tie_break_point_handle(player);
     }
+
+    tennis_match_point_check();
 }
 
 static void tennis_regular_point_handle(player_t *player)
@@ -106,8 +108,6 @@ static void tennis_regular_point_handle(player_t *player)
             tennis_40_points_handle(player);
             break;
     }
-
-    tennis_match_point_check();
 }
 
 static void tennis_tie_break_point_handle(player_t *player)
@@ -397,13 +397,23 @@ static bool tennis_match_point_for_player_check(player_t *player)
 {
     if((SETS_TO_WIN_MATCH - 1) == player->sets)
     {
-        if(5 == player->games)
+        if(5 <= player->games)
         {
             player_t *opposite_player = tennis_get_opposite_player(player);
-            
-            if(40 == player->points && 40 > opposite_player->points)
+
+            if(REGULAR == state)
             {
-                return true;
+                if(40 == player->points && 40 > opposite_player->points)
+                {
+                    return true;
+                }
+            }
+            else if(TIE_BREAK == state)
+            {
+                if(6 == player->points && 6 > opposite_player->points)
+                {
+                    return true;
+                }
             }
         }
     }

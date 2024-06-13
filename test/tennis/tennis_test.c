@@ -722,7 +722,11 @@ TEST(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point)
 
 TEST(tennis, MATCH_POINT_during_tie_break_5_5_and_player_gets_point)
 {
+    set_win(PLAYER1);
+    set_win(PLAYER2);
+
     tie_break();
+
     points_win_during_tie_break(PLAYER1, 5);
     points_win_during_tie_break(PLAYER2, 5);
     points_win_during_tie_break(PLAYER1, 1);
