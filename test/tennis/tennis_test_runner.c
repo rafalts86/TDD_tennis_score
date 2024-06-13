@@ -52,4 +52,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, MATCH_POINT_event);
    RUN_TEST_CASE(tennis, MATCH_POINT_40_0_and_opposte_player_gets_point);
    RUN_TEST_CASE(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point);
+   RUN_TEST_CASE(tennis, MATCH_POINT_during_tie_break_5_5_and_player_gets_point);
 }

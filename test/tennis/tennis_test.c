@@ -719,3 +719,13 @@ TEST(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point)
 
     TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
 }
+
+TEST(tennis, MATCH_POINT_during_tie_break_5_5_and_player_gets_point)
+{
+    tie_break();
+    points_win_during_tie_break(PLAYER1, 5);
+    points_win_during_tie_break(PLAYER2, 5);
+    points_win_during_tie_break(PLAYER1, 1);
+
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+}
