@@ -43,7 +43,7 @@ static void tennis_tie_break_point_handle(player_t *player);
 static void tennis_score_table_save(void);
 static void tennis_match_win_check(player_t *player);
 static void tennis_change_player_to_serve(void);
-static void tennis_match_point_check(void);
+static void tennis_event_check(void);
 static bool tennis_match_point_for_player_check(player_t *player);
 static bool tennis_set_point_for_player_check(player_t *player);
 
@@ -89,7 +89,7 @@ static void tennis_point_handle(player_t *player)
         tennis_tie_break_point_handle(player);
     }
 
-    tennis_match_point_check();
+    tennis_event_check();
 }
 
 static void tennis_regular_point_handle(player_t *player)
@@ -382,7 +382,7 @@ event_t tennis_get_event(void)
     return event;
 }
 
-static void tennis_match_point_check(void)
+static void tennis_event_check(void)
 {
     if(true == tennis_set_point_for_player_check(&player1))
     {
