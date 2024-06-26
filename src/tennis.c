@@ -384,9 +384,27 @@ event_t tennis_get_event(void)
 
 static void tennis_match_point_check(void)
 {
-    if(true == tennis_match_point_for_player_check(&player1) || true == tennis_match_point_for_player_check(&player2))
+    if(true == tennis_set_point_for_player_check(&player1))
     {
-        event = MATCH_POINT;
+        if(true == tennis_match_point_for_player_check(&player1))
+        {
+            event = MATCH_POINT;
+        }
+        else
+        {
+            event = SET_POINT;
+        }
+    }
+    else if(true == tennis_set_point_for_player_check(&player2))
+    {
+        if(true == tennis_match_point_for_player_check(&player2))
+        {
+            event = MATCH_POINT;
+        }
+        else
+        {
+            event = SET_POINT;
+        }
     }
     else
     {
@@ -398,10 +416,7 @@ static bool tennis_match_point_for_player_check(player_t *player)
 {
     if((SETS_TO_WIN_MATCH - 1) == player->sets)
     {
-        if(true == tennis_set_point_for_player_check(player))
-        {
-            return true;
-        }
+        return true;
     }
 
     return false;
