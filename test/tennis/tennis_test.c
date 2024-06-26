@@ -804,3 +804,90 @@ TEST(tennis, SET_POINT_event)
 
     TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
 }
+
+TEST(tennis, SET_POINT_40_0_and_opposte_player_gets_point)
+{
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER2);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_40_30_and_opposte_player_gets_point)
+{
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_during_tie_break_5_5_and_player_gets_point)
+{
+    tie_break();
+
+    points_win_during_tie_break(PLAYER1, 5);
+    points_win_during_tie_break(PLAYER2, 5);
+    points_win_during_tie_break(PLAYER1, 1);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_during_advantage_40_40_and_player_gets_point)
+{
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER2);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point)
+{
+    tie_break();
+
+    points_win_during_tie_break(PLAYER1, 6);
+    points_win_during_tie_break(PLAYER2, 6);
+    points_win_during_tie_break(PLAYER1, 1);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point)
+{
+    tie_break();
+
+    points_win_during_tie_break(PLAYER1, 6);
+    points_win_during_tie_break(PLAYER2, 6);
+    points_win_during_tie_break(PLAYER1, 1);
+    points_win_during_tie_break(PLAYER2, 1);
+
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+}
+
+TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points)
+{
+    tie_break();
+
+    points_win_during_tie_break(PLAYER1, 6);
+    points_win_during_tie_break(PLAYER2, 6);
+    points_win_during_tie_break(PLAYER1, 1);
+    points_win_during_tie_break(PLAYER2, 2);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}

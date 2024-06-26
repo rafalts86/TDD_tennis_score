@@ -58,4 +58,11 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point);
    RUN_TEST_CASE(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points);
    RUN_TEST_CASE(tennis, SET_POINT_event);
+   RUN_TEST_CASE(tennis, SET_POINT_40_0_and_opposte_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_40_30_and_opposte_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_during_tie_break_5_5_and_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_during_advantage_40_40_and_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point);
+   RUN_TEST_CASE(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points);
 }
