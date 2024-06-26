@@ -45,6 +45,7 @@ static void tennis_match_win_check(player_t *player);
 static void tennis_change_player_to_serve(void);
 static void tennis_match_point_check(void);
 static bool tennis_match_point_for_player_check(player_t *player);
+static bool tennis_set_point_for_player_check(player_t *player);
 
 void tennis_init(void)
 {
@@ -397,23 +398,33 @@ static bool tennis_match_point_for_player_check(player_t *player)
 {
     if((SETS_TO_WIN_MATCH - 1) == player->sets)
     {
-        if(5 <= player->games)
+        if(true == tennis_set_point_for_player_check(player))
         {
-            player_t *opposite_player = tennis_get_opposite_player(player);
+            return true;
+        }
+    }
 
-            if(REGULAR == state)
+    return false;
+}
+
+static bool tennis_set_point_for_player_check(player_t *player)
+{
+    if(5 <= player->games)
+    {
+        player_t *opposite_player = tennis_get_opposite_player(player);
+
+        if(REGULAR == state)
+        {
+            if((40 == player->points && 40 > opposite_player->points) || true == tennis_is_player_advantage(player))
             {
-                if((40 == player->points && 40 > opposite_player->points) || true == tennis_is_player_advantage(player))
-                {
-                    return true;
-                }
+                return true;
             }
-            else if(TIE_BREAK == state)
+        }
+        else if(TIE_BREAK == state)
+        {
+            if((6 == player->points && 6 > opposite_player->points) || true == tennis_is_player_advantage(player))
             {
-                if((6 == player->points && 6 > opposite_player->points) || true == tennis_is_player_advantage(player))
-                {
-                    return true;
-                }
+                return true;
             }
         }
     }
