@@ -891,3 +891,15 @@ TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets
 
     TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
 }
+
+TEST(tennis, SET_POINT_player_gets_set_then_event_none)
+{
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+}
