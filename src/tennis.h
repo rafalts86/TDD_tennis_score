@@ -24,6 +24,7 @@ enum player
 typedef enum
 {
     EVENT_NONE,
+    SET_POINT,
     MATCH_POINT,
 } event_t;
 

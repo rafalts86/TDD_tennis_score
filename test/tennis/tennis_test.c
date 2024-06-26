@@ -793,3 +793,14 @@ TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_ge
 
     TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
 }
+
+TEST(tennis, SET_POINT_event)
+{
+    games_win(PLAYER1, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+}
