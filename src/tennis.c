@@ -46,8 +46,8 @@ static void tennis_change_player_to_serve(void);
 static void tennis_event_check(void);
 static bool tennis_match_point_for_player_check(player_t *player);
 static bool tennis_set_point_for_player_check(player_t *player);
-static bool tennis_is_set_point_during_regular(player_t *player);
-static bool tennis_is_set_point_during_tie_break(player_t *player);
+static bool tennis_is_games_result_for_possible_set_point(player_t *player);
+static bool tennis_is_points_result_for_possible_set_point(player_t *player);
 
 void tennis_init(void)
 {
@@ -426,45 +426,38 @@ static bool tennis_match_point_for_player_check(player_t *player)
 
 static bool tennis_set_point_for_player_check(player_t *player)
 {
+    if(true == tennis_is_games_result_for_possible_set_point(player) && true == tennis_is_points_result_for_possible_set_point(player))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+static bool tennis_is_games_result_for_possible_set_point(player_t *player)
+{
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
+    return (((player->games == (GAMES_TO_WIN_SET - 1)) && (opposite_player->games < (GAMES_TO_WIN_SET - 1))) || ((player->games == GAMES_TO_WIN_SET) && (opposite_player->games >= (GAMES_TO_WIN_SET - 1))));
+}
+
+static bool tennis_is_points_result_for_possible_set_point(player_t *player)
+{
+    player_t *opposite_player = tennis_get_opposite_player(player);
+
     switch(state)
     {
         case REGULAR:
-            if(true == tennis_is_set_point_during_regular(player))
-            {
-                return true;
-            }
+            return ((40 == player->points && 40 > opposite_player->points) || (true == tennis_is_player_advantage(player)));
             break;
 
         case TIE_BREAK:
-            if(true == tennis_is_set_point_during_tie_break(player))
-            {
-                return true;
-            }
+            return ((6 == player->points && 6 > opposite_player->points) || (true == tennis_is_player_advantage(player)));
             break;
-    }
-
-    return false;
-}
-
-static bool tennis_is_set_point_during_regular(player_t *player)
-{
-    player_t *opposite_player = tennis_get_opposite_player(player);
-
-    if(((player->games == (GAMES_TO_WIN_SET - 1)) && (opposite_player->games < (GAMES_TO_WIN_SET - 1))) || ((player->games == GAMES_TO_WIN_SET) && (opposite_player->games >= (GAMES_TO_WIN_SET - 1))))
-    {
-        return ((40 == player->points && 40 > opposite_player->points) || (true == tennis_is_player_advantage(player)));
-    }
-
-    return false;
-}
-
-static bool tennis_is_set_point_during_tie_break(player_t *player)
-{
-    player_t *opposite_player = tennis_get_opposite_player(player);
-
-    if(((player->games == (GAMES_TO_WIN_SET - 1)) && (opposite_player->games < (GAMES_TO_WIN_SET - 1))) || ((player->games == GAMES_TO_WIN_SET) && (opposite_player->games >= (GAMES_TO_WIN_SET - 1))))
-    {
-        return ((6 == player->points && 6 > opposite_player->points) || (true == tennis_is_player_advantage(player)));
+        
+        case MATCH_ENDED:
+            //FALLTHOUGH
+            break;
     }
 
     return false;
