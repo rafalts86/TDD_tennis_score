@@ -35,7 +35,7 @@ static void tennis_add_set(player_t *player);
 static uint8_t tennis_get_player_games(player_t *player);
 static void tennis_game_win_handle(player_t *player);
 static void tennis_set_win_check(player_t *player);
-static void tennis_add_1_point(player_t *player);\
+static void tennis_add_1_point(player_t *player);
 static void tennis_set_win_handle(player_t *player);
 static void tennis_reset_games(void);
 static void tennis_regular_point_handle(player_t *player);

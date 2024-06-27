@@ -903,3 +903,15 @@ TEST(tennis, SET_POINT_player_gets_set_then_event_none)
 
     TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
 }
+
+TEST(tennis, Games_5_5_Points_40_0_no_set_point)
+{
+    games_win(PLAYER1, 5);
+    games_win(PLAYER2, 5);
+
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+    tennis_point(PLAYER1);
+
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+}

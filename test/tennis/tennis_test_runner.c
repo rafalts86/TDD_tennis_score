@@ -66,4 +66,5 @@ TEST_GROUP_RUNNER(tennis)
    RUN_TEST_CASE(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point);
    RUN_TEST_CASE(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points);
    RUN_TEST_CASE(tennis, SET_POINT_player_gets_set_then_event_none);
+   RUN_TEST_CASE(tennis, Games_5_5_Points_40_0_no_set_point);
 }
