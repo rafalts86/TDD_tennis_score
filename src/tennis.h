@@ -3,6 +3,7 @@
 
 #define PLAYERS                 2
 #define MAX_SETS_NO             5
+#define GAMES_TO_WIN_SET        6
 
 #define SETS_TO_WIN_MATCH       2       //women
 //#define SETS_TO_WIN_MATCH     3       //men
