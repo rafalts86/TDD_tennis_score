@@ -335,7 +335,7 @@ TEST(tennis, Player1_6games_Player2_6games_tie_break)
 
     tie_break();
 
-    TEST_ASSERT_EQUAL(expected_state, tennis_get_state());
+    TEST_ASSERT_EQUAL(expected_state, tennis_game_state_get());
 }
 
 TEST(tennis, Player1_wins_point_during_tie_break)
@@ -372,7 +372,7 @@ TEST(tennis, Player1_wins_set_after_tie_break_new_status_regular)
         point_win_during_tie_break(PLAYER1);
     }
     
-    TEST_ASSERT_EQUAL(REGULAR, tennis_get_state());
+    TEST_ASSERT_EQUAL(REGULAR, tennis_game_state_get());
 }
 
 TEST(tennis, Reset_games_and_points_after_set_win)
@@ -599,7 +599,7 @@ TEST(tennis, Player1_wins_state_match_ended)
     set_win(PLAYER1);
     set_win(PLAYER1);
 
-    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
+    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_game_state_get());
 }
 
 TEST(tennis, Player2_wins_state_match_ended)
@@ -607,7 +607,7 @@ TEST(tennis, Player2_wins_state_match_ended)
     set_win(PLAYER2);
     set_win(PLAYER2);
 
-    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_get_state());
+    TEST_ASSERT_EQUAL(MATCH_ENDED, tennis_game_state_get());
 }
 
 TEST(tennis, Match_ended_no_more_points_for_players)

@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "tennis_event.h"
+#include "tennis_game_state.h"
 
 #define PLAYERS                 2
 #define MAX_SETS_NO             5
@@ -20,20 +21,12 @@ typedef struct
   bool is_advantage;
 } player_t;
 
-typedef enum
-{
-    REGULAR,
-    TIE_BREAK,
-    MATCH_ENDED
-} game_state_t;
-
 enum player
 {
     PLAYER_NONE = -1,
     PLAYER1,
     PLAYER2,
 };
-
 
 
 void tennis_init(void);
@@ -43,7 +36,6 @@ uint8_t tennis_get_games(enum player player);
 uint8_t tennis_get_sets(enum player player);
 bool tennis_is_advantage(enum player player);
 bool tennis_is_player_advantage(player_t *player);
-game_state_t tennis_get_state(void);
 uint8_t tennis_get_score_table_games(enum player player, uint8_t set);
 enum player tennis_winner_get(void);
 uint8_t tennis_get_current_set(void);

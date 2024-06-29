@@ -1,5 +1,4 @@
 #include <string.h>
-
 #include "tennis.h"
 
 
@@ -9,13 +8,10 @@ static player_t player2;
 static enum player winner;
 static enum player player_to_serve;
 
-static game_state_t state;
-
 static uint8_t score_table[PLAYERS][MAX_SETS_NO];
 
 
 static void tennis_point_handle(player_t *player);
-
 static void tennis_add_15_points(player_t *player);
 static void tennis_add_10_points(player_t *player);
 static void tennis_40_points_handle(player_t *player);
@@ -52,8 +48,8 @@ void tennis_init(void)
 
     winner = PLAYER_NONE;
     player_to_serve = PLAYER1;
-    state = REGULAR;
 
+    tennis_game_state_init();
     tennis_event_init();
     memset(score_table, 0, 6 * sizeof(uint8_t));
 }
@@ -72,11 +68,11 @@ void tennis_point(enum player player)
 
 static void tennis_point_handle(player_t *player)
 {
-    if(REGULAR == state)
+    if(REGULAR == tennis_game_state_get())
     {
         tennis_regular_point_handle(player);
     }
-    else if(TIE_BREAK == state)
+    else if(TIE_BREAK == tennis_game_state_get())
     {
         tennis_tie_break_point_handle(player);
     }
@@ -186,7 +182,7 @@ static void tennis_set_win_check(player_t *player)
     }
     else if(6 == tennis_get_player_games(player) && 6 == tennis_get_player_games(opposite_player))
     {
-        state = TIE_BREAK;
+        tennis_game_state_set(TIE_BREAK);
     }
 }
 
@@ -302,11 +298,6 @@ uint8_t tennis_get_sets(enum player player)
     return player2.sets;
 }
 
-game_state_t tennis_get_state(void)
-{
-    return state;
-}
-
 uint8_t tennis_get_score_table_games(enum player player, uint8_t set)
 {
     return score_table[player][set-1];
@@ -324,7 +315,7 @@ static void tennis_match_win_check(player_t *player)
 {
     if(SETS_TO_WIN_MATCH == player->sets)
     {
-        state = MATCH_ENDED;
+        tennis_game_state_set(MATCH_ENDED);
         player_to_serve = PLAYER_NONE;
 
         if(player == &player1)
@@ -338,7 +329,7 @@ static void tennis_match_win_check(player_t *player)
     }
     else
     {
-        state = REGULAR;
+        tennis_game_state_set(REGULAR);
     }
 }
 

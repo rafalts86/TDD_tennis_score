@@ -89,7 +89,7 @@ static bool tennis_is_points_result_for_possible_set_point(player_t *player)
 {
     player_t *opposite_player = tennis_get_opposite_player(player);
 
-    switch(tennis_get_state())
+    switch(tennis_game_state_get())
     {
         case REGULAR:
             return ((40 == player->points && 40 > opposite_player->points) || (true == tennis_is_player_advantage(player)));
