@@ -5,7 +5,8 @@
         "stdint.h": "c",
         "stdbool.h": "c",
         "string.h": "c",
-        "tennis_event.h": "c"
+        "tennis_event.h": "c",
+        "tennis_game_state.h": "c"
     },
     "cmake.sourceDirectory": "C:/Users/Gosia/Documents/VSC/TDD_tennis_score/test/tennis"
 }
