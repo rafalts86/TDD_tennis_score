@@ -677,7 +677,7 @@ TEST (tennis, Player_NONE_is_player_to_serve_after_end_of_match)
 
 TEST(tennis, EVENT_NONE_after_init)
 {
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_event)
@@ -689,7 +689,7 @@ TEST(tennis, MATCH_POINT_event)
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_40_0_and_opposte_player_gets_point)
@@ -702,7 +702,7 @@ TEST(tennis, MATCH_POINT_40_0_and_opposte_player_gets_point)
     tennis_point(PLAYER1);
     tennis_point(PLAYER2);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point)
@@ -717,7 +717,7 @@ TEST(tennis, MATCH_POINT_40_30_and_opposte_player_gets_point)
     tennis_point(PLAYER2);
     tennis_point(PLAYER2);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_during_tie_break_5_5_and_player_gets_point)
@@ -731,7 +731,7 @@ TEST(tennis, MATCH_POINT_during_tie_break_5_5_and_player_gets_point)
     points_win_during_tie_break(PLAYER2, 5);
     points_win_during_tie_break(PLAYER1, 1);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_during_advantage_40_40_and_player_gets_point)
@@ -747,7 +747,7 @@ TEST(tennis, MATCH_POINT_during_advantage_40_40_and_player_gets_point)
     tennis_point(PLAYER2);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point)
@@ -761,7 +761,7 @@ TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point
     points_win_during_tie_break(PLAYER2, 6);
     points_win_during_tie_break(PLAYER1, 1);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point)
@@ -776,7 +776,7 @@ TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_ge
     points_win_during_tie_break(PLAYER1, 1);
     points_win_during_tie_break(PLAYER2, 1);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points)
@@ -791,7 +791,7 @@ TEST(tennis, MATCH_POINT_during_advantage_in_tie_break_AD_and_opposite_player_ge
     points_win_during_tie_break(PLAYER1, 1);
     points_win_during_tie_break(PLAYER2, 2);
 
-    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(MATCH_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_event)
@@ -802,7 +802,7 @@ TEST(tennis, SET_POINT_event)
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_40_0_and_opposte_player_gets_point)
@@ -814,7 +814,7 @@ TEST(tennis, SET_POINT_40_0_and_opposte_player_gets_point)
     tennis_point(PLAYER1);
     tennis_point(PLAYER2);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_40_30_and_opposte_player_gets_point)
@@ -828,7 +828,7 @@ TEST(tennis, SET_POINT_40_30_and_opposte_player_gets_point)
     tennis_point(PLAYER2);
     tennis_point(PLAYER2);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_during_tie_break_5_5_and_player_gets_point)
@@ -839,7 +839,7 @@ TEST(tennis, SET_POINT_during_tie_break_5_5_and_player_gets_point)
     points_win_during_tie_break(PLAYER2, 5);
     points_win_during_tie_break(PLAYER1, 1);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_during_advantage_40_40_and_player_gets_point)
@@ -854,7 +854,7 @@ TEST(tennis, SET_POINT_during_advantage_40_40_and_player_gets_point)
     tennis_point(PLAYER2);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point)
@@ -865,7 +865,7 @@ TEST(tennis, SET_POINT_during_advantage_in_tie_break_6_6_and_player_gets_point)
     points_win_during_tie_break(PLAYER2, 6);
     points_win_during_tie_break(PLAYER1, 1);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_point)
@@ -877,7 +877,7 @@ TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets
     points_win_during_tie_break(PLAYER1, 1);
     points_win_during_tie_break(PLAYER2, 1);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets_2_points)
@@ -889,7 +889,7 @@ TEST(tennis, SET_POINT_during_advantage_in_tie_break_AD_and_opposite_player_gets
     points_win_during_tie_break(PLAYER1, 1);
     points_win_during_tie_break(PLAYER2, 2);
 
-    TEST_ASSERT_EQUAL(SET_POINT, tennis_get_event());
+    TEST_ASSERT_EQUAL(SET_POINT, tennis_event_get());
 }
 
 TEST(tennis, SET_POINT_player_gets_set_then_event_none)
@@ -901,7 +901,7 @@ TEST(tennis, SET_POINT_player_gets_set_then_event_none)
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }
 
 TEST(tennis, Games_5_5_Points_40_0_no_set_point)
@@ -913,5 +913,5 @@ TEST(tennis, Games_5_5_Points_40_0_no_set_point)
     tennis_point(PLAYER1);
     tennis_point(PLAYER1);
 
-    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_get_event());
+    TEST_ASSERT_EQUAL(EVENT_NONE, tennis_event_get());
 }

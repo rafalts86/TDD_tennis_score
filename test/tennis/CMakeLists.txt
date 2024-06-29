@@ -17,6 +17,7 @@ set(TEST_INCLUDE_DIRS
 
 set(SRCS
 	../../src/tennis.c
+	../../src/tennis_event.c
 )
 
 set(TEST_SRCS
