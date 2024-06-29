@@ -80,14 +80,14 @@ static bool tennis_set_point_for_player_check(player_t *player)
 
 static bool tennis_is_games_result_for_possible_set_point(player_t *player)
 {
-    player_t *opposite_player = tennis_get_opposite_player(player);
+    player_t *opposite_player = tennis_opposite_player_get(player);
 
     return (((player->games == (GAMES_TO_WIN_SET - 1)) && (opposite_player->games < (GAMES_TO_WIN_SET - 1))) || ((player->games == GAMES_TO_WIN_SET) && (opposite_player->games >= (GAMES_TO_WIN_SET - 1))));
 }
 
 static bool tennis_is_points_result_for_possible_set_point(player_t *player)
 {
-    player_t *opposite_player = tennis_get_opposite_player(player);
+    player_t *opposite_player = tennis_opposite_player_get(player);
 
     switch(tennis_game_state_get())
     {

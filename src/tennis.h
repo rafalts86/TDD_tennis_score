@@ -31,14 +31,18 @@ enum player
 
 void tennis_init(void);
 void tennis_point(enum player player);
-uint8_t tennis_get_points(enum player player);
-uint8_t tennis_get_games(enum player player);
-uint8_t tennis_get_sets(enum player player);
+
+uint8_t tennis_points_get(enum player player);
+uint8_t tennis_games_get(enum player player);
+uint8_t tennis_sets_get(enum player player);
+
 bool tennis_is_advantage(enum player player);
 bool tennis_is_player_advantage(player_t *player);
-uint8_t tennis_get_score_table_games(enum player player, uint8_t set);
+
+uint8_t tennis_score_table_games_get(enum player player, uint8_t set);
 enum player tennis_winner_get(void);
-uint8_t tennis_get_current_set(void);
-enum player tennis_get_player_to_serve(void);
+uint8_t tennis_current_set_get(void);
+enum player tennis_player_to_serve_get(void);
+
 player_t *tennis_player_get(enum player selected_player);
-player_t *tennis_get_opposite_player(player_t *player);
+player_t *tennis_opposite_player_get(player_t *player);
